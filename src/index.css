@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+/* Nunito (Variable) */
+@font-face {
+    font-family: 'Nunito';
+    src: url('./assets/fonts/nunito/Nunito-VariableFont_wght.ttf') format('truetype');
+    font-weight: 200 900;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('assets/fonts/nunito/Nunito-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: 200 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Winslow */
+
+@font-face {
+    font-family: 'Winslow-black';
+    src: url('./assets/fonts/winslow/winslowtitle-blackitalic.otf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Winslow-bold';
+    src: url('./assets/fonts/winslow/winslowtitle-bolditalic.otf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Winslow-medium';
+    src: url('./assets/fonts/winslow/winslowtitle-mediumitalic.otf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Winslow-regular';
+    src: url('./assets/fonts/winslow/winslowtitle-regularitalic.otf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Winslow-light';
+    src: url('./assets/fonts/winslow/winslowtitle-lightitalic.otf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Winslow-thin';
+    src: url('./assets/fonts/winslow/winslowtitle-thinitalic.otf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+
+body {
+    font-family: "Nunito", sans-serif;
+}
+
+.nunito {
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+}
+
+.italic-nunito {
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: italic;
+}

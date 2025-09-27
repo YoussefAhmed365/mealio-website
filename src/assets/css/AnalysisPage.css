@@ -1,0 +1,12 @@
+.MuiGauge-root tspan {
+    fill: white;
+}
+
+.MuiChartsLabelMark-mask {
+    height: 8px !important;
+    border-radius: 9999px !important;
+}
+
+.MuiChartsLabelMark-root {
+    width: 8px !important;
+}

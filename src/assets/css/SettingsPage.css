@@ -1,0 +1,47 @@
+@keyframes ScaleBar {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 95%;
+    }
+}
+
+@keyframes RemoveBar {
+    from {
+        width: 95%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+.nav-btns Button {
+    position: relative;
+}
+
+.nav-btns .active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 3px;
+    border-radius: 20px;
+    background-color: #d97706;
+    animation: ScaleBar 150ms forwards;
+    width: 95%;
+}
+
+.nav-btns .removing::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 3px;
+    border-radius: 20px;
+    background-color: #d97706;
+    animation: RemoveBar 150ms forwards;
+    width: 0%;
+}
