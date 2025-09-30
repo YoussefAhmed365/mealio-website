@@ -1,9 +1,9 @@
 import Navbar from '../components/shared/MainNavbar'
 import Footer from '../components/shared/MainFooter'
 import { useState } from 'react'
-import { ChevronDownIcon } from '@heroicons/react/24/solid'
+import { ArrowLongRightIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
 
-const FAQ_DATA = [
+const General_FAQ = [
     {
         question: "What is Meal.io?",
         answer: "Meal.io is a smart meal planning application designed to simplify your life. We provide personalized weekly meal plans, automated grocery lists, and a vast library of recipes tailored to your dietary needs and preferences."
@@ -26,24 +26,47 @@ const FAQ_DATA = [
     }
 ];
 
+const Service_FAQ = [
+    {
+        question: "What is Meal.io?",
+        answer: "Meal.io is a smart meal planning application designed to simplify your life. We provide personalized weekly meal plans, automated grocery lists, and a vast library of recipes tailored to your dietary needs and preferences."
+    },
+    {
+        question: "How do I customize my meal plan?",
+        answer: "Meal.io allows extensive customization of your meal plan. You can swap out recipes you don't like, add your own favorite dishes, and adjust serving sizes directly from your weekly plan view. Our smart system will adapt to your changes."
+    },
+    {
+        question: "What kind of recipes are available?",
+        answer: "We offer a diverse range of recipes catering to various cuisines, dietary restrictions (e.g., vegetarian, vegan, gluten-free), and skill levels. Our library is constantly updated with new and exciting dishes from professional chefs and our community."
+    }
+];
+
 const AccordionItem = ({ faq, isOpen, onClick }) => (
-    <div className="border-b">
+    <div className="max-h-min rounded-lg border border-gray-200 mb-4 last:mb-0">
         <button
             onClick={onClick}
-            className="w-full flex justify-between items-center text-left py-4 px-2 focus:outline-hidden"
+            className="w-full flex justify-between items-center text-left py-5 px-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-opacity-75 rounded-lg"
+            aria-expanded={isOpen}
         >
-            <span className="text-lg font-semibold text-gray-800">{faq.question}</span>
-            <ChevronDownIcon className={`size-5 text-gray-500 transition-transform duration-300 ${isOpen ? 'transform rotate-180' : ''}`} />
+            <span className={`text-lg font-medium transition-colors duration-300 ${isOpen ? 'text-amber-600' : 'text-gray-800'}`}>{faq.question}</span>
+            <span className="flex-shrink-0 ml-4">
+                <ChevronDownIcon className={`w-6 h-6 text-gray-400 transition-transform duration-500 ease-in-out ${isOpen ? 'transform rotate-180 text-amber-600' : ''}`} />
+            </span>
         </button>
-        <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96' : 'max-h-0'}`}>
-            <div className="p-4 bg-gray-50">
-                <p className="text-gray-600">{faq.answer}</p>
+
+        <div
+            className={`grid overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+        >
+            <div className="overflow-hidden">
+                <div className="px-6 pb-5 pt-1">
+                    <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                </div>
             </div>
         </div>
     </div>
 );
 
-const FaqPage = () => {
+const General = () => {
     const [openIndex, setOpenIndex] = useState(null);
 
     const handleToggle = (index) => {
@@ -51,26 +74,137 @@ const FaqPage = () => {
     };
 
     return (
+        General_FAQ.map((faq, index) => (
+            <AccordionItem
+                key={index}
+                faq={faq}
+                isOpen={openIndex === index}
+                onClick={() => handleToggle(index)}
+            />
+        ))
+    );
+};
+
+const Service = () => {
+    const [openIndex, setOpenIndex] = useState(null);
+
+    const handleToggle = (index) => {
+        setOpenIndex(openIndex === index ? null : index);
+    };
+
+    return (
+        Service_FAQ.map((faq, index) => (
+            <AccordionItem
+                key={index}
+                faq={faq}
+                isOpen={openIndex === index}
+                onClick={() => handleToggle(index)}
+            />
+        ))
+    );
+};
+
+const Support = () => {
+    const [openIndex, setOpenIndex] = useState(null);
+
+    const handleToggle = (index) => {
+        setOpenIndex(openIndex === index ? null : index);
+    };
+
+    return (
+        Service_FAQ.map((faq, index) => (
+            <AccordionItem
+                key={index}
+                faq={faq}
+                isOpen={openIndex === index}
+                onClick={() => handleToggle(index)}
+            />
+        ))
+    );
+};
+
+const Privacy = () => {
+    const [openIndex, setOpenIndex] = useState(null);
+
+    const handleToggle = (index) => {
+        setOpenIndex(openIndex === index ? null : index);
+    };
+
+    return (
+        Service_FAQ.map((faq, index) => (
+            <AccordionItem
+                key={index}
+                faq={faq}
+                isOpen={openIndex === index}
+                onClick={() => handleToggle(index)}
+            />
+        ))
+    );
+};
+
+const FAQSections = () => {
+    const [activeTab, setActiveTab] = useState('general');
+
+    const renderContent = () => {
+        switch (activeTab) {
+            case 'general':
+                return <General />;
+            case 'service':
+                return <Service />;
+            case 'support':
+                return <Support />;
+            case 'privacy':
+                return <Privacy />;
+            default:
+                return <General />;
+        };
+    };
+
+    const TabButton = ({ label, tabKey }) => (
+        <button
+            className={`w-full px-5 py-5 rounded-lg font-semibold text-md text-start cursor-pointer ${activeTab === tabKey ? 'bg-amber-500/15 text-amber-800 hover:bg-amber-500/20' : 'bg-white text-gray-800 hover:bg-gray-200'} transition-colors`}
+            onClick={() => setActiveTab(tabKey)}
+        >
+            {label}
+        </button>
+    );
+
+    return (
+        <main className='min-h-screen w-full px-8 md:px-20 lg:px-32'>
+            <div className="w-full py-12 md:py-20 px-4">
+                <div className="mx-auto">
+                    <div className="text-center mb-26 space-y-4">
+                        <p className="mt-4 text-lg font-medium text-gray-600">Find answers about Meal.io</p>
+                        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">Frequently Asked Questions</h1>
+                    </div>
+                    <div className='w-full grid grid-cols-4 gap-20'>
+                        <div className='col-span-1 divide-y divide-gray-200 flex flex-col justify-start items-start'>
+                            <TabButton label="General" tabKey="general" />
+                            <TabButton label="Our Service" tabKey="service" />
+                            <TabButton label="Support" tabKey="support" />
+                            <TabButton label="Privacy & Policy" tabKey="privacy" />
+                        </div>
+                        <div className="col-span-3">
+                            {renderContent()}
+                        </div>
+                    </div>
+                    <div className="text-center mt-12">
+                        <p className="text-gray-600">Couldn't find the answer you're looking for?</p>
+                        <a href="#" className="mt-2 inline-block font-medium text-amber-600 hover:text-amber-700 transition-colors">
+                            Contact our support team <ArrowLongRightIcon className='size-5 inline' />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    );
+};
+
+const FaqPage = () => {
+    return (
         <>
             <Navbar />
-
-            <main className="w-full max-w-4xl mx-auto py-8 px-4">
-                <div className="text-center mb-12">
-                    <h1 className="text-4xl font-bold text-gray-900">Frequently Asked Questions</h1>
-                    <p className="mt-2 text-lg text-gray-600">Find answers to the most common questions about Meal.io.</p>
-                </div>
-                <div className="border rounded-lg">
-                    {FAQ_DATA.map((faq, index) => (
-                        <AccordionItem
-                            key={index}
-                            faq={faq}
-                            isOpen={openIndex === index}
-                            onClick={() => handleToggle(index)}
-                        />
-                    ))}
-                </div>
-            </main>
-
+            <FAQSections />
             <Footer />
         </>
     );

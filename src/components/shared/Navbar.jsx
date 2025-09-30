@@ -58,13 +58,13 @@ const SettingsIconFn = ({ isActive }) => isActive ? (
 );
 
 const pages = [
-    { name: 'Home', path: '/dashboard', icon: HomeIconFn },
-    { name: 'Weekly Plans', path: '/plans', icon: PlanIconFn },
-    { name: 'Recipes', path: '/recipes', icon: RecipesIconFn },
-    { name: 'Shopping List', path: '/shopping-list', icon: ShoppingIconFn },
-    { name: 'Discover Recipes', path: '/discover', icon: DiscoverIconFn },
-    { name: 'Nutrition Analysis', path: '/analysis', icon: AnalysisIconFn },
-    { name: 'Settings', path: '/settings', icon: SettingsIconFn },
+    { name: 'Home', path: '/main/home', icon: HomeIconFn },
+    { name: 'Weekly Plans', path: '/main/plans', icon: PlanIconFn },
+    { name: 'Recipes', path: '/main/recipes', icon: RecipesIconFn },
+    { name: 'Shopping List', path: '/main/shopping-list', icon: ShoppingIconFn },
+    { name: 'Discover Recipes', path: '/main/discover', icon: DiscoverIconFn },
+    { name: 'Nutrition Analysis', path: '/main/analysis', icon: AnalysisIconFn },
+    { name: 'Settings', path: '/main/settings', icon: SettingsIconFn },
 ];
 
 // Move isTrackNutrition state up to Navbar and pass as prop
@@ -142,13 +142,13 @@ const Navbar = () => {
             <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} isTrackNutrition={isTrackNutrition} />
             <main className={`flex-1 transition-all duration-300 ease-in-out ${isCollapsed ? 'ml-20' : 'ml-20 md:ml-64 z-50 md:z-0 '}`}>
                 <Routes>
-                    <Route path="/dashboard/*" element={<Dashboard />} />
-                    <Route path="/plans/*" element={<Plans />} />
-                    <Route path="/recipes/*" element={<Recipes />} />
-                    <Route path="/shopping/*-list" element={<Shopping />} />
-                    <Route path="/discover/*" element={<Discover />} />
-                    <Route path="/analysis/*" element={<Analysis />} />
-                    <Route path="/settings/*" element={<Settings />} />
+                    <Route path="/main/home/*" element={<Dashboard />} />
+                    <Route path="/main/plans/*" element={<Plans />} />
+                    <Route path="/main/recipes/*" element={<Recipes />} />
+                    <Route path="/main/shopping/*-list" element={<Shopping />} />
+                    <Route path="/main/discover/*" element={<Discover />} />
+                    <Route path="/main/analysis/*" element={<Analysis />} />
+                    <Route path="/main/settings/*" element={<Settings />} />
                 </Routes>
             </main>
         </div>

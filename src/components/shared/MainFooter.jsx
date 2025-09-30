@@ -88,9 +88,9 @@ const Footer = () => {
 
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0 py-6 px-10 bg-amber-700">
                 <p className="text-white">&copy; 2025 Meal.io. All rights reserved.</p>
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-6">
                     {bottomFooterLinks[0].links.map((link) => (
-                        <Link key={link.name} to={link.to} className="text-white hover:text-shadow-lg hover:text-shadow-white/70 transition duration-200">{link.name}</Link>
+                        <Link key={link.name} to={link.to} className="text-white hover:text-shadow-xs hover:text-shadow-white/80 transition-all duration-200">{link.name}</Link>
                     ))}
                 </div>
             </div>
