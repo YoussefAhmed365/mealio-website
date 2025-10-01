@@ -1,28 +1,23 @@
 import Navbar from '../components/shared/MainNavbar'
 import Footer from '../components/shared/MainFooter'
 import Field from '../components/shared/Field'
+import AnimatedBackground from '../animations/AnimatedBackground'
 
 // Icons
 import { EnvelopeIcon, PhoneIcon, ArrowRightCircleIcon } from '@heroicons/react/24/solid'
 
 const ContactPage = () => {
     return (
-        <>
+        <div className='relative'>
+            <AnimatedBackground />
+
             <div className='relative h-96 mb-20'>
                 <Navbar />
-                <div className='absolute -z-10 top-0 left-1/2 -translate-x-1/2 w-full h-96 bg-amber-50 flex justify-center items-center'>
+                <div className='absolute -z-10 top-0 left-1/2 -translate-x-1/2 w-full h-96 flex justify-center items-center'>
                     <h1 className='text-4xl font-bold text-gray-800'>Contact Us</h1>
                 </div>
-                <div className='absolute top-16 h-80 w-full'>
-                    <div className="bg-svg relative">
-                        <img src="" alt="" className="absolute top-0 left-0" />
-                        <img src="" alt="" className="absolute top-0 left-0" />
-                        <img src="" alt="" className="absolute top-0 left-0" />
-                        <img src="" alt="" className="absolute top-0 left-0" />
-                    </div>
-                </div>
             </div>
-            
+
             <main className='grid grid-cols-1 md:grid-cols-2 items-center gap-8 px-8 md:px-40'>
                 <div className="col-span-1">
                     <h5 className='text-md font-medium text-gray-600 mb-2'>WE'RE HERE FOR YOU</h5>
@@ -52,14 +47,14 @@ const ContactPage = () => {
                         <button
                             type="submit"
                             className='max-w-fit pl-0.5 pr-6 py-0.5 flex justify-start items-center gap-2 bg-amber-600 text-white font-semibold rounded-full hover:bg-amber-700 disabled:bg-amber-300 focus:ring-4 focus:ring-amber-300 focus:ring-opacity-75 focus:outline-hidden transition-colors duration-200 cursor-pointer'>
-                                <ArrowRightCircleIcon className='size-12' />Send Message
+                            <ArrowRightCircleIcon className='size-12' />Send Message
                         </button>
                     </form>
                 </div>
             </main>
 
             <Footer />
-        </>
+        </div>
     );
 };
 

@@ -41,7 +41,7 @@ export default function HeroSection() {
                                     <div className="hidden md:block">
                                         <div className='flex justify-end items-center space-x-4'>
                                             <Link className='text-amber-600 font-medium hover:text-amber-800 transition duration-300' to={"/login"}>login</Link>
-                                            <Link className='text-amber-600 font-medium border border-amber-600 rounded-md px-5 py-2.5 hover:text-white hover:bg-amber-700 focus:ring focus:ring-amber-500 transition duration-300' to={"/signup"}>Create an account</Link>
+                                            <Link className='text-amber-600 font-medium border border-amber-600 rounded-md px-5 py-2.5 hover:text-white hover:bg-amber-700 focus:ring focus:ring-amber-500 backdrop-blur-md transition duration-300' to={"/signup"}>Create an account</Link>
                                         </div>
                                     </div>
                                 </div>

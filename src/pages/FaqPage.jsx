@@ -2,6 +2,7 @@ import Navbar from '../components/shared/MainNavbar'
 import Footer from '../components/shared/MainFooter'
 import { useState } from 'react'
 import { ArrowLongRightIcon, ChevronDownIcon } from '@heroicons/react/24/solid'
+import AnimatedBackground from '../animations/AnimatedBackground';
 
 const General_FAQ = [
     {
@@ -42,7 +43,7 @@ const Service_FAQ = [
 ];
 
 const AccordionItem = ({ faq, isOpen, onClick }) => (
-    <div className="max-h-min rounded-lg border border-gray-200 mb-4 last:mb-0">
+    <div className="max-h-min bg-white rounded-lg border border-gray-200 mb-4 last:mb-0">
         <button
             onClick={onClick}
             className="w-full flex justify-between items-center text-left py-5 px-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-opacity-75 rounded-lg"
@@ -162,7 +163,7 @@ const FAQSections = () => {
 
     const TabButton = ({ label, tabKey }) => (
         <button
-            className={`w-full px-5 py-5 rounded-lg font-semibold text-md text-start cursor-pointer ${activeTab === tabKey ? 'bg-amber-500/15 text-amber-800 hover:bg-amber-500/20' : 'bg-white text-gray-800 hover:bg-gray-200'} transition-colors`}
+            className={`w-full px-5 py-5 rounded-lg font-semibold text-md text-start cursor-pointer ${activeTab === tabKey ? 'bg-amber-500/15 text-amber-800 hover:bg-amber-500/20' : 'bg-transparent text-gray-800 hover:bg-gray-200'} transition-colors`}
             onClick={() => setActiveTab(tabKey)}
         >
             {label}
@@ -170,40 +171,50 @@ const FAQSections = () => {
     );
 
     return (
-        <main className='min-h-screen w-full px-8 md:px-20 lg:px-32'>
-            <div className="w-full py-12 md:py-20 px-4">
-                <div className="mx-auto">
-                    <div className="text-center mb-26 space-y-4">
-                        <p className="mt-4 text-lg font-medium text-gray-600">Find answers about Meal.io</p>
-                        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">Frequently Asked Questions</h1>
-                    </div>
-                    <div className='w-full grid grid-cols-4 gap-20'>
-                        <div className='col-span-1 divide-y divide-gray-200 flex flex-col justify-start items-start'>
-                            <TabButton label="General" tabKey="general" />
-                            <TabButton label="Our Service" tabKey="service" />
-                            <TabButton label="Support" tabKey="support" />
-                            <TabButton label="Privacy & Policy" tabKey="privacy" />
-                        </div>
-                        <div className="col-span-3">
-                            {renderContent()}
-                        </div>
-                    </div>
-                    <div className="text-center mt-12">
-                        <p className="text-gray-600">Couldn't find the answer you're looking for?</p>
-                        <a href="#" className="mt-2 inline-block font-medium text-amber-600 hover:text-amber-700 transition-colors">
-                            Contact our support team <ArrowLongRightIcon className='size-5 inline' />
-                        </a>
-                    </div>
+        <div className='relative'>
+            <AnimatedBackground className={"-z-10"} />
+
+            <div className='relative h-96 mb-20'>
+                <Navbar />
+                <div className='absolute -z-10 top-0 left-1/2 -translate-x-1/2 w-full h-96 flex justify-center items-center'>
+                    <h1 className='text-4xl font-bold text-gray-800'>Contact Us</h1>
                 </div>
             </div>
-        </main>
+
+            <main className='min-h-screen w-full px-8 md:px-20 lg:px-32'>
+                <div className="w-full py-12 md:py-20 px-4">
+                    <div className="mx-auto">
+                        <div className="text-center mb-26 space-y-4">
+                            <p className="mt-4 text-lg font-medium text-gray-600">Find answers about Meal.io</p>
+                            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">Frequently Asked Questions</h1>
+                        </div>
+                        <div className='w-full grid grid-cols-4 gap-20'>
+                            <div className='col-span-1 divide-y divide-gray-200 flex flex-col'>
+                                <TabButton label="General" tabKey="general" />
+                                <TabButton label="Our Service" tabKey="service" />
+                                <TabButton label="Support" tabKey="support" />
+                                <TabButton label="Privacy & Policy" tabKey="privacy" />
+                            </div>
+                            <div className="col-span-3">
+                                {renderContent()}
+                            </div>
+                        </div>
+                        <div className="text-center mt-12">
+                            <p className="text-gray-600">Couldn't find the answer you're looking for?</p>
+                            <a href="#" className="mt-2 inline-block font-medium text-amber-600 hover:text-amber-700 transition-colors">
+                                Contact our support team <ArrowLongRightIcon className='size-5 inline' />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
     );
 };
 
 const FaqPage = () => {
     return (
         <>
-            <Navbar />
             <FAQSections />
             <Footer />
         </>

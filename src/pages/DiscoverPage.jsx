@@ -76,12 +76,12 @@ const DiscoverPage = () => {
     const RecipePostCard = ({ post }) => (
         <div className='bg-white rounded-xl shadow-lg overflow-hidden group'>
             {/* Use Link to navigate to the new detail page */}
-            <Link to={`/meal/${post.id}`}>
+            <Link to={`/main/meal/${post.id}`}>
                 <img src={post.image} alt={post.title} className='w-full h-40 object-cover cursor-pointer' />
             </Link>
             <div className='p-4 space-y-3'>
                 {/* Use Link for the title as well */}
-                <Link to={`/meal/${post.id}`} className='text-lg font-bold text-gray-800 cursor-pointer hover:text-amber-600'>{post.title}</Link>
+                <Link to={`/main/meal/${post.id}`} className='text-lg font-bold text-gray-800 cursor-pointer hover:text-amber-600'>{post.title}</Link>
                 <div className='flex items-center space-x-2'>
                     <img src={post.author.avatar} alt={post.author.name} className='w-8 h-8 rounded-full' />
                     <span className='text-sm font-medium text-gray-600'>{post.author.name}</span>

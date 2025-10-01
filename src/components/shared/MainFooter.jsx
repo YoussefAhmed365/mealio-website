@@ -4,22 +4,21 @@ import AppleIcon from '../../assets/icons/Apple'
 
 const linkSections = [
     {
-        title: "Main",
-        links: [
-            { name: "Platform", to: "/platform" },
-            { name: "Plans & Pricing", to: "/plans-and-pricing" },
-            { name: "AI Meal Planner", to: "/ai-meal-planner" },
-            { name: "Community", to: "/community" },
-        ],
-    },
-    {
         title: "Company",
         links: [
             { name: "About Us", to: "/about" },
-            { name: "Resources", to: "/resources" },
             { name: "What Others Say", to: "/what-others-say" },
-            { name: "Careers", to: "/careers" },
             { name: "Blog", to: "/blog" }
+        ],
+    },
+    {
+        title: "Legal",
+        links: [
+            { name: "Privacy Policy", to: "/legal/privacy" },
+            { name: "Terms of Service", to: "/legal/terms" },
+            { name: "Cookie Policy", to: "/legal/cookies" },
+            { name: "Data Protection", to: "/legal/data-protection" },
+            { name: "User Rights", to: "/legal/user-rights" },
         ],
     },
     {
@@ -39,16 +38,16 @@ const bottomFooterLinks = [
     {
         links: [
             { name: "Contact", to: "/contact" },
-            { name: "Privacy Policy", to: "/privacy" },
-            { name: "Terms of Service", to: "/terms" },
-            { name: "Cookies", to: "/cookies" }
+            { name: "Privacy Policy", to: "/legal/privacy" },
+            { name: "Terms of Service", to: "/legal/terms" },
+            { name: "Cookies", to: "/legal/cookies" }
         ],
     },
 ];
 
 const Footer = () => {
     return (
-        <footer className="w-full mt-20 bg-amber-50 pt-12 font-semibold">
+        <footer className="w-full mt-20 bg-amber-50 pt-12 font-semibold border-t-[3px] border-amber-100">
             <div className="flex flex-col md:flex-row justify-between items-center px-8 md:px-10 pb-12">
                 <div className="space-y-2 w-full md:w-1/3 mb-10 md:mb-0">
                     <h1 className="text-3xl font-bold"><span className="text-amber-600">Meal</span><span className="text-amber-900">.io</span></h1>
