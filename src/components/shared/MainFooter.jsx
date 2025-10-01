@@ -85,6 +85,10 @@ const Footer = () => {
                 </div>
             </div>
 
+            {/* <div className="text-center content-center py-6 px-10 border-t-2 border-amber-100">
+                <p className="text-gray-800">&copy; 2025 Meal.io. All rights reserved.</p>
+            </div> */}
+
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0 py-6 px-10 bg-amber-700">
                 <p className="text-white">&copy; 2025 Meal.io. All rights reserved.</p>
                 <div className="flex flex-wrap gap-6">
