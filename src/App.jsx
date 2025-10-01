@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
 
 // Import page components
@@ -19,8 +19,7 @@ import Analysis from './pages/AnalysisPage'
 import Settings from './pages/SettingsPage'
 import FaqPage from './pages/FaqPage'
 import ContactPage from './pages/ContactPage'
-import TermsOfServicePage from './pages/TermsOfServicePage'
-import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
+import LegalPageLayout, { legalNavItems } from './pages/LegalPageLayout'
 
 function App() {
     return (
@@ -33,18 +32,23 @@ function App() {
                     <Route path='/restore-account' element={<ResetPasswordPage />} />
                     <Route path='/reset-password' element={<OTPReset />} />
                     <Route path='/onboarding' element={<OnboardingFlow />} />
-                    <Route path='/main/home/*' element={<Dashboard />} />
-                    <Route path='/main/plans/*' element={<Plans />} />
-                    <Route path='/main/recipes/*' element={<Recipes />} />
-                    <Route path='/main/shopping-list/*' element={<Shopping />} />
-                    <Route path='/main/discover/*' element={<Discover />} />
+                    <Route path='/main/home' element={<Dashboard />} />
+                    <Route path='/main/plans' element={<Plans />} />
+                    <Route path='/main/recipes' element={<Recipes />} />
+                    <Route path='/main/shopping-list' element={<Shopping />} />
+                    <Route path='/main/discover' element={<Discover />} />
                     <Route path='/main/meal/:id' element={<MealDetail />} />
-                    <Route path='/main/analysis/*' element={<Analysis />} />
-                    <Route path='/main/settings/*' element={<Settings />} />
+                    <Route path='/main/analysis' element={<Analysis />} />
+                    <Route path='/main/settings' element={<Settings />} />
                     <Route path='/faq' element={<FaqPage />} />
                     <Route path='/contact' element={<ContactPage />} />
-                    <Route path='/terms-of-service' element={<TermsOfServicePage />} />
-                    <Route path='/privacy-policy' element={<PrivacyPolicyPage />} />
+
+                    <Route path="/legal" element={<LegalPageLayout />}>
+                        <Route index element={<Navigate to="/legal/privacy" replace />} />
+                        {legalNavItems.map(item => (
+                            <Route key={item.id} path={item.path.replace('/legal/', '')} element={item.component} />
+                        ))}
+                    </Route>
                 </Routes>
             </OnboardingProvider>
         </>
