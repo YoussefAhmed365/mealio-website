@@ -86,14 +86,14 @@ export const legalNavItems = [
 const SideNavigation = () => {
     const location = useLocation();
     return (
-        <nav className="sticky top-24 flex flex-col w-full md:w-56 space-y-2">
+        <nav className="sticky top-24 flex flex-col w-full md:w-56 divide-y divide-gray-200">
             {legalNavItems.map(item => (
                 <Link
                     key={item.id}
                     to={item.path}
-                    className={`min-w-max text-start text-md px-6 py-3 font-semibold rounded-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-amber-300 ${location.pathname === item.path
-                        ? 'bg-amber-500 text-white shadow-md'
-                        : 'bg-white text-gray-700 hover:bg-amber-50 hover:text-amber-700'
+                    className={`w-full px-5 py-5 rounded-lg font-semibold text-md text-start cursor-pointer transition-colors ${location.pathname === item.path
+                        ? 'bg-amber-500/15 text-amber-800 hover:bg-amber-500/20'
+                        : 'bg-white text-gray-800 hover:bg-gray-200'
                         }`}
                 >
                     {item.label}
