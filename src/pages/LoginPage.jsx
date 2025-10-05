@@ -9,11 +9,11 @@ import SparkleIcon from "../assets/icons/Sparkle"
 
 const LoginPage = () => {
     return (
-        <div className="p-5 h-screen sm:px-20 sm:py-7">
-            <div className="max-w-full h-full mx-auto flex flex-col-reverse justify-center items-center gap-6 sm:flex-row sm:justify-between sm:items-stretch sm:gap-20">
-                <div className="w-full h-full flex flex-col justify-center items-start gap-2">
-                    <h6 className="text-xl font-bold"><span className="text-amber-600">Meal</span><span className="text-amber-950">.io</span></h6>
-                    <h1 className="text-xl font-bold sm:text-4xl">Welcome back!</h1>
+        <div className="px-6 py-10 md:px-20 md:py-7 content-center h-auto md:h-screen">
+            <div className="max-w-full mx-auto flex flex-col-reverse justify-center items-center gap-10 md:flex-row md:justify-between md:items-stretch md:gap-20">
+                <div className="w-full flex flex-col justify-center items-start gap-2">
+                    <h6 className="text-2xl md:text-xl font-bold"><span className="text-amber-600">Meal</span><span className="text-amber-950">.io</span></h6>
+                    <h1 className="text-4xl font-bold">Welcome back!</h1>
                     <p className="text-gray-600 font-medium">To keep connected with us please login with your personal info</p>
 
                     <form className="w-full flex flex-col justify-start items-center gap-2 mt-2">
@@ -33,14 +33,14 @@ const LoginPage = () => {
                     </div>
 
                     <div className="w-full mt-2 flex justify-between items-center gap-5">
-                        <button className="w-full py-3 border border-gray-400 rounded-md bg-transparent flex justify-center items-center text-gray-950 hover:bg-slate-100 transition duration-200">
-                            <GoogleIcon />
+                        <button className="w-full py-4 border border-gray-400 rounded-md bg-transparent flex justify-center items-center text-gray-950 hover:bg-slate-100 transition duration-200">
+                            <GoogleIcon className="size-7" />
                         </button>
-                        <button className="w-full py-3 border border-gray-400 rounded-md bg-transparent flex justify-center items-center text-gray-950 hover:bg-slate-100 transition duration-200">
-                            <MicrosoftIcon />
+                        <button className="w-full py-4 border border-gray-400 rounded-md bg-transparent flex justify-center items-center text-gray-950 hover:bg-slate-100 transition duration-200">
+                            <MicrosoftIcon className="size-7" />
                         </button>
-                        <button className="w-full py-3 border border-gray-400 rounded-md bg-transparent flex justify-center items-center text-gray-950 hover:bg-slate-100 transition duration-200">
-                            <FacebookIcon />
+                        <button className="w-full py-4 border border-gray-400 rounded-md bg-transparent flex justify-center items-center text-gray-950 hover:bg-slate-100 transition duration-200">
+                            <FacebookIcon className="size-7" />
                         </button>
                     </div>
 
@@ -49,7 +49,7 @@ const LoginPage = () => {
                     </div>
                 </div>
 
-                <div className="w-full h-auto rounded-xl bg-center bg-cover bg-no-repeat hidden sm:flex justify-center items-end px-8 py-12 absolute sm:relative -z-10 sm:z-0" style={{ backgroundImage: `url(${BackgroundImage})` }}>
+                <div className="w-full h-[400px] md:h-auto rounded-2xl bg-center bg-cover bg-no-repeat flex justify-center items-end px-4 md:px-8 py-6 md:py-12" style={{ backgroundImage: `url(${BackgroundImage})` }}>
                     <div className="w-full h-full bg-slate-400/30 backdrop-filter backdrop-blur-lg rounded-xl px-8 py-12 text-white flex flex-col justify-between items-start">
                         <div>
                             <div className="w-1/4 flex justify-center items-center gap-x-2.5 mb-10">

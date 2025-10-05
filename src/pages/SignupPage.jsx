@@ -8,11 +8,11 @@ import FacebookIcon from "../assets/icons/Facebook"
 
 const SignupPage = () => {
     return (
-        <div className="p-5 h-screen sm:px-20 sm:py-7">
-            <div className="max-w-full h-full mx-auto flex justify-center items-center gap-6 sm:flex-row sm:justify-between sm:items-stretch sm:gap-20">
-                <div className="w-full h-full flex flex-col justify-center items-start gap-2">
-                    <h6 className="text-xl font-bold"><span className="text-amber-600">Meal</span><span className="text-amber-950">.io</span></h6>
-                    <h1 className="text-3xl font-bold sm:text-4xl">Create a new account!</h1>
+        <div className="px-6 py-10 md:px-20 md:py-7">
+            <div className="max-w-full mx-auto flex flex-col-reverse justify-center items-center gap-10 md:flex-row md:justify-between md:items-stretch md:gap-20">
+                <div className="w-full flex flex-col justify-center items-start gap-2">
+                    <h6 className="text-2xl md:text-xl font-bold"><span className="text-amber-600">Meal</span><span className="text-amber-950">.io</span></h6>
+                    <h1 className="text-4xl font-bold">Create a new account!</h1>
                     <p className="text-gray-600 font-medium">Join us now and try Meal.io to see the magic in planning</p>
 
                     <form className="w-full flex flex-col justify-start items-center space-y-3 mt-2">
@@ -30,14 +30,14 @@ const SignupPage = () => {
                     </div>
                     
                     <div className="w-full mt-2 flex justify-between items-center gap-5">
-                        <button className="w-full py-3 border border-gray-400 rounded-md bg-transparent flex justify-center items-center text-gray-950 hover:bg-slate-100 transition duration-200">
-                            <GoogleIcon />
+                        <button className="w-full py-4 border border-gray-400 rounded-md bg-transparent flex justify-center items-center text-gray-950 hover:bg-slate-100 transition duration-200">
+                            <GoogleIcon className="size-7" />
                         </button>
-                        <button className="w-full py-3 border border-gray-400 rounded-md bg-transparent flex justify-center items-center text-gray-950 hover:bg-slate-100 transition duration-200">
-                            <MicrosoftIcon />
+                        <button className="w-full py-4 border border-gray-400 rounded-md bg-transparent flex justify-center items-center text-gray-950 hover:bg-slate-100 transition duration-200">
+                            <MicrosoftIcon className="size-7" />
                         </button>
-                        <button className="w-full py-3 border border-gray-400 rounded-md bg-transparent flex justify-center items-center text-gray-950 hover:bg-slate-100 transition duration-200">
-                            <FacebookIcon />
+                        <button className="w-full py-4 border border-gray-400 rounded-md bg-transparent flex justify-center items-center text-gray-950 hover:bg-slate-100 transition duration-200">
+                            <FacebookIcon className="size-7" />
                         </button>
                     </div>
 
@@ -46,7 +46,7 @@ const SignupPage = () => {
                     </div>
                 </div>
 
-                <div className="w-full h-auto rounded-2xl bg-center bg-cover bg-no-repeat hidden sm:flex justify-center items-end px-8 py-12 absolute sm:relative -z-10 sm:z-0" style={{ backgroundImage: `url(${BackgroundImage})` }}>
+                <div className="w-full h-fit md:h-auto rounded-2xl bg-center bg-cover bg-no-repeat flex justify-center items-end px-4 md:px-8 py-6 md:py-12" style={{ backgroundImage: `url(${BackgroundImage})` }}>
                     <div>
                         <div className="flex justify-start items-center gap-4 mb-5">
                             <button className="px-4 py-1.5 bg-transparent border border-gray-300 text-slate-100 font-medium rounded-lg backdrop-filter hover:bg-slate-400/30 hover:backdrop-blur-md transition">Community of chiefs</button>
