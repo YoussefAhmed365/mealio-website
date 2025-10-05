@@ -5,7 +5,7 @@ import Button from '../shared/Button'
 
 // Icons
 import { ChevronRightIcon } from '@heroicons/react/24/outline'
-import Facebook from '../../assets/icons/Facebook'
+import FacebookIcon from '../../assets/icons/Facebook'
 import Instagram from '../../assets/icons/Instagram'
 import XTwitter from '../../assets/icons/Xtwitter'
 import Behance from '../../assets/icons/Behance'
@@ -25,7 +25,7 @@ export default function HeroSection() {
     ];
 
     const SocialIcons = [
-        { to: "/", icon: Facebook },
+        { to: "/", icon: FacebookIcon },
         { to: "/", icon: Instagram },
         { to: "/", icon: XTwitter },
         { to: "/", icon: Behance },
@@ -78,7 +78,7 @@ export default function HeroSection() {
                                     className={'flex h-11 w-11 items-center justify-center rounded-full border-4 border-white bg-amber-600 text-white shadow-lg hover:shadow-sm transform transition-all duration-300 ease-in-out hover:bg-amber-800 hover:-translate-y-1 -ml-4 first:ml-0 group-hover:ml-1'}
                                 >
                                     <Link to={social.to}>
-                                        <social.icon />
+                                        <social.icon className='size-4' />
                                     </Link>
                                 </div>
                             ))}
