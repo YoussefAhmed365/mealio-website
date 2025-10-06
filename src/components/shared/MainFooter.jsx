@@ -4,21 +4,21 @@ import AppleIcon from '../../assets/icons/Apple'
 
 const linkSections = [
     {
-        title: "Company",
-        links: [
-            { name: "About Us", to: "/about" },
-            { name: "What Others Say", to: "/what-others-say" },
-            { name: "Blog", to: "/blog" }
-        ],
-    },
-    {
         title: "Legal",
         links: [
             { name: "Privacy Policy", to: "/legal/privacy" },
             { name: "Terms of Service", to: "/legal/terms" },
-            { name: "Cookie Policy", to: "/legal/cookies" },
             { name: "Data Protection", to: "/legal/data-protection" },
             { name: "User Rights", to: "/legal/user-rights" },
+        ],
+    },
+    {
+        title: "Company & Help",
+        links: [
+            { name: "About Us", to: "/about" },
+            { name: "FAQ", to: "/faq" },
+            { name: "Contact Us", to: "/contact" },
+            { name: "Blog", to: "/blog" }
         ],
     },
     {
@@ -32,15 +32,26 @@ const linkSections = [
             { name: "Behance", to: "#" }
         ],
     },
+    {
+        title: "Get Started",
+        links: [
+            // For external links, you would use a regular <a> tag
+            // e.g., <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
+            { name: "Sign Up", to: "/signup" },
+            { name: "Login", to: "/login" },
+            { name: "Forgot Password", to: "/forgot-password" },
+            { name: "How it Works", to: "/how-it-works" }
+        ],
+    },
 ];
 
 const bottomFooterLinks = [
     {
         links: [
-            { name: "Contact", to: "/contact" },
-            { name: "Privacy Policy", to: "/legal/privacy" },
-            { name: "Terms of Service", to: "/legal/terms" },
-            { name: "Cookies", to: "/legal/cookies" }
+            { name: "Cookies Policy", to: "/legal/cookies" },
+            { name: "Sitemap", to: "/sitemap" },
+            { name: "Careers", to: "/careers" },
+            { name: "Security Statement", to: "/legal/security" }
         ],
     },
 ];
