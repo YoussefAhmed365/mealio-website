@@ -1,6 +1,10 @@
 // Libraries
 import { Routes, Route, Navigate } from 'react-router-dom'
 
+// Contexts
+// You have to use this import with showLoading() and hideLoading() functions from the context
+// import { useLoading } from '../contexts/LoadingContext'; <-- Use it inside any file where loading state is needed
+
 // pages
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
