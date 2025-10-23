@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
-import BGImage from '../../assets/images/reset-password.webp'
-import Button from '../shared/Button'
-import Field from '../shared/Field'
+import BGImage from '../assets/images/reset-password.webp'
+import Button from '../components/shared/Button'
+import Field from '../components/shared/Field'
 
-const OTPReset = () => {
+const OTPPasswordResetPage = () => {
     // State to hold the OTP digits, initialized as an array of empty strings
     const [otp, setOtp] = useState(new Array(6).fill(''));
     // Refs for each input field to manage focus
@@ -162,4 +162,4 @@ const OTPReset = () => {
     );
 };
 
-export default OTPReset;
+export default OTPPasswordResetPage;

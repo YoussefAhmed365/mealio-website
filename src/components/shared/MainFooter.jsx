@@ -39,7 +39,7 @@ const linkSections = [
             // e.g., <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
             { name: "Sign Up", to: "/signup" },
             { name: "Login", to: "/login" },
-            { name: "Forgot Password", to: "/forgot-password" },
+            { name: "Forgot Password", to: "/restore-account" },
             { name: "How it Works", to: "/how-it-works" }
         ],
     },
@@ -66,7 +66,7 @@ const Footer = () => {
                     <p className="text-gray-600">Meal.io, 2025.</p>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-x-16">
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-10 md:gap-x-16">
                     {linkSections.map((section, idx) => (
                         <div key={idx} className="col-span-1 space-y-4">
                             <h6 className="text-base font-semibold">{section.title}</h6>

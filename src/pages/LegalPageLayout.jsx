@@ -73,6 +73,19 @@ const UserRightsContent = () => (
     </>
 );
 
+const SecurityStatement = () => (
+    <>
+        <h2>Last Updated: September 28, 2025</h2>
+        <p>You have certain rights regarding your personal data. This page describes your rights and explains how you can exercise them.</p>
+        <h3>Your Rights</h3>
+        <ul>
+            <li><strong>The right to access</strong> – You have the right to request copies of your personal data.</li>
+            <li><strong>The right to rectification</strong> – You have the right to request that we correct any information you believe is inaccurate.</li>
+            <li><strong>The right to erasure</strong> – You have the right to request that we erase your personal data, under certain conditions.</li>
+        </ul>
+    </>
+);
+
 // --- ROUTING CONFIGURATION ---
 export const legalNavItems = [
     { id: 'privacy', path: '/legal/privacy', label: 'Privacy Policy', title: 'Privacy Policy', component: <PrivacyPolicyContent /> },
@@ -80,6 +93,7 @@ export const legalNavItems = [
     { id: 'cookies', path: '/legal/cookies', label: 'Cookie Policy', title: 'Cookie Policy', component: <CookiePolicyContent /> },
     { id: 'protection', path: '/legal/data-protection', label: 'Data Protection', title: 'Data Protection', component: <DataProtectionContent /> },
     { id: 'rights', path: '/legal/user-rights', label: 'User Rights', title: 'Your Rights', component: <UserRightsContent /> },
+    { id: 'security', path: '/legal/security', label: 'Security Statement', title: 'The Security Statement', component: <SecurityStatement /> },
 ];
 
 // --- REUSABLE COMPONENTS ---

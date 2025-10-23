@@ -14,16 +14,9 @@ import SparkleIcon from '../../assets/icons/Sparkle'
 import HeroBG from '../../assets/images/HeroBG.jpg'
 import HeroWaves from '../../assets/images/heroWaves.svg'
 
-import './css/Hero.css'
+import '../../assets/css/Hero.css'
 
 export default function HeroSection() {
-    const NavBtns = [
-        { to: "/", text: "Featured" },
-        { to: "/", text: "How It Works" },
-        { to: "/", text: "Community" },
-        { to: "/", text: "Articles" }
-    ];
-
     const SocialIcons = [
         { to: "/", icon: FacebookIcon },
         { to: "/", icon: Instagram },

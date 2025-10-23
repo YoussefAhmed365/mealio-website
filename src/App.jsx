@@ -1,12 +1,12 @@
+// Libraries
 import { Routes, Route, Navigate } from 'react-router-dom'
-import './App.css'
 
-// Import page components
+// pages
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
-import ResetPasswordPage from './pages/ResetPasswordPage'
-import OTPReset from './components/resetPassword/OTPReset'
+import RestoreAccountPage from './pages/RestoreAccountPage'
+import OTPPasswordResetPage from './pages/OTPPasswordResetPage'
 import OnboardingFlow from './pages/OnboardingPage'
 import { OnboardingProvider } from './contexts/OnboradingContext'
 import Dashboard from './pages/DashboardPage'
@@ -29,8 +29,8 @@ function App() {
                     <Route path='/' element={<HomePage />} />
                     <Route path='/login' element={<LoginPage />} />
                     <Route path='/signup' element={<SignupPage />} />
-                    <Route path='/restore-account' element={<ResetPasswordPage />} />
-                    <Route path='/reset-password' element={<OTPReset />} />
+                    <Route path='/restore-account' element={<RestoreAccountPage />} />
+                    <Route path='/reset-password' element={<OTPPasswordResetPage />} />
                     <Route path='/onboarding' element={<OnboardingFlow />} />
                     <Route path='/main/home' element={<Dashboard />} />
                     <Route path='/main/plans' element={<Plans />} />

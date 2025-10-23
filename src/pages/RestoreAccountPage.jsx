@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import BGImage from '../../assets/images/reset-password.webp'
-import Button from '../shared/Button'
-import Field from '../shared/Field'
+import BGImage from '../assets/images/reset-password.webp'
+import Button from '../components/shared/Button'
+import Field from '../components/shared/Field'
 
-const ResetMain = () => {
+const RestoreAccountPage = () => {
     // Use state to manage which section is visible.
     // true: 'provide-email-container' is visible, false: 'send-mail-container' is visible
     const [showProvideEmail, setShowProvideEmail] = useState(true);
@@ -64,4 +64,4 @@ const ResetMain = () => {
     );
 };
 
-export default ResetMain;
+export default RestoreAccountPage;

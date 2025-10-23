@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Routes, Route, NavLink } from 'react-router-dom'
-import './css/Navbar.css'
+import '../../assets/css/Navbar.css'
 
 // Pages
 import Dashboard from '../../pages/DashboardPage'

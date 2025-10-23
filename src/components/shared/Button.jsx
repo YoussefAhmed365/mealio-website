@@ -15,7 +15,7 @@ const Button = ({ key, onClick, children, type = "button", styleType = "primary"
     };
 
     return (
-        <button key={key} onClick={onClick} className={classMap[styleType] + " " + className} type={type} disabled={disabled}>
+        <button key={key} onClick={onClick} className={classMap[styleType] + " cursor-pointer " + className} type={type} disabled={disabled}>
             {children}
         </button>
     );
