@@ -1,15 +1,6 @@
 import { useState } from 'react'
-import { Routes, Route, NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate, Outlet } from 'react-router-dom'
 import '../../assets/css/Navbar.css'
-
-// Pages
-import Dashboard from '../../pages/DashboardPage'
-import Plans from '../../pages/PlansPage'
-import Recipes from '../../pages/RecipesPage'
-import Shopping from '../../pages/ShoppingPage'
-import Discover from '../../pages/DiscoverPage'
-import Analysis from '../../pages/AnalysisPage'
-import Settings from '../../pages/SettingsPage'
 
 // Icons
 import DiscoverIcon from '../../assets/icons/Utensils'
@@ -142,15 +133,7 @@ const Navbar = () => {
         <div className="flex bg-gray-50 min-h-screen">
             <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} isTrackNutrition={isTrackNutrition} />
             <main className={`flex-1 transition-all duration-300 ease-in-out ${isCollapsed ? 'ml-20' : 'ml-20 md:ml-64 z-50 md:z-0 '}`}>
-                <Routes>
-                    <Route path="/main/home/*" element={<Dashboard />} />
-                    <Route path="/main/plans/*" element={<Plans />} />
-                    <Route path="/main/recipes/*" element={<Recipes />} />
-                    <Route path="/main/shopping/*-list" element={<Shopping />} />
-                    <Route path="/main/discover/*" element={<Discover />} />
-                    <Route path="/main/analysis/*" element={<Analysis />} />
-                    <Route path="/main/settings/*" element={<Settings />} />
-                </Routes>
+                <Outlet />
             </main>
         </div>
     );

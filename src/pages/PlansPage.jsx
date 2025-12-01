@@ -1,7 +1,6 @@
 // Components & Libraries
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Navbar from "../components/shared/Navbar"
 import TopNavbar from '../components/shared/TopNavbar'
 import Button from '../components/shared/Button'
 
@@ -102,11 +101,9 @@ const PlansPage = () => {
     );
 
     return (
-        <div className='flex justify-start'>
-            <Navbar />
-            <div className='w-full flex flex-col justify-start items-center'>
-                <TopNavbar />
-                <div className='w-full grid grid-cols-1 xl:grid-cols-7 gap-4 my-4 px-4'>
+        <div className='w-full flex flex-col justify-start items-center'>
+            <TopNavbar />
+            <div className='w-full grid grid-cols-1 xl:grid-cols-7 gap-4 my-4 px-4'>
 
                     {/* Main */}
                     <div className='md:col-span-5 space-y-5'>
@@ -168,7 +165,6 @@ const PlansPage = () => {
                             </Button>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     );
