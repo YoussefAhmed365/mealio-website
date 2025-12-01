@@ -1,7 +1,6 @@
 // Components & Libraries
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import Navbar from "../components/shared/Navbar"
 import TopNavbar from '../components/shared/TopNavbar'
 import Button from '../components/shared/Button'
 
@@ -96,12 +95,9 @@ const MealDetailPage = () => {
 
     if (!meal) {
         return (
-            <div className='flex justify-start bg-gray-50'>
-                <Navbar />
-                <div className='w-full flex flex-col justify-start items-center p-8'>
-                    <TopNavbar />
-                    <div className='text-center text-gray-600 mt-10'>Loading meal details...</div>
-                </div>
+            <div className='w-full flex flex-col justify-start items-center p-8 bg-gray-50'>
+                <TopNavbar />
+                <div className='text-center text-gray-600 mt-10'>Loading meal details...</div>
             </div>
         );
     }
@@ -110,11 +106,9 @@ const MealDetailPage = () => {
     const similarMeals = mockPosts.filter(post => post.id !== meal.id).slice(0, 3); // Show up to 3 similar meals
 
     return (
-        <div className='flex justify-start'>
-            <Navbar />
-            <div className='w-full flex flex-col justify-start items-center'>
-                <TopNavbar />
-                <div className='w-full grid grid-cols-1 md:grid-cols-7 gap-4 my-4 px-4'>
+        <div className='w-full flex flex-col justify-start items-center'>
+            <TopNavbar />
+            <div className='w-full grid grid-cols-1 md:grid-cols-7 gap-4 my-4 px-4'>
 
                     {/* Main Content - Meal Details */}
                     <div className='md:col-span-5 space-y-6 bg-white p-6 rounded-xl shadow-lg'>
@@ -223,7 +217,6 @@ const MealDetailPage = () => {
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     );

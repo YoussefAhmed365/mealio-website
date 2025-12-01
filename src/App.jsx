@@ -2,6 +2,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/shared/ProtectedRoute';
+import Navbar from './components/shared/Navbar';
 
 // Contexts
 // You have to use this import with showLoading() and hideLoading() functions from the context
@@ -41,14 +42,16 @@ function App() {
 
                     {/* Protected Routes */}
                     <Route element={<ProtectedRoute />}>
-                        <Route path='/main/home' element={<Dashboard />} />
-                        <Route path='/main/plans' element={<Plans />} />
-                        <Route path='/main/recipes' element={<Recipes />} />
-                        <Route path='/main/shopping-list' element={<Shopping />} />
-                        <Route path='/main/discover' element={<Discover />} />
-                        <Route path='/main/meal/:id' element={<MealDetail />} />
-                        <Route path='/main/analysis' element={<Analysis />} />
-                        <Route path='/main/settings' element={<Settings />} />
+                        <Route element={<Navbar />}>
+                            <Route path='/main/home' element={<Dashboard />} />
+                            <Route path='/main/plans' element={<Plans />} />
+                            <Route path='/main/recipes' element={<Recipes />} />
+                            <Route path='/main/shopping-list' element={<Shopping />} />
+                            <Route path='/main/discover' element={<Discover />} />
+                            <Route path='/main/meal/:id' element={<MealDetail />} />
+                            <Route path='/main/analysis' element={<Analysis />} />
+                            <Route path='/main/settings' element={<Settings />} />
+                        </Route>
                     </Route>
 
                     <Route path='/faq' element={<FaqPage />} />

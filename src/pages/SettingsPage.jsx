@@ -3,7 +3,6 @@
 // ============================
 
 import { useState } from "react"
-import Navbar from "../components/shared/Navbar"
 import TopNavbar from "../components/shared/TopNavbar"
 import Button from "../components/shared/Button"
 
@@ -48,11 +47,9 @@ const SettingsPage = () => {
     ];
 
     return (
-        <div className="flex justify-start">
-            <Navbar />
-            <div className="w-full flex flex-col justify-start items-center">
-                <TopNavbar />
-                <div className="w-full grid grid-cols-1 xl:grid-cols-5 my-4 px-4">
+        <div className="w-full flex flex-col justify-start items-center">
+            <TopNavbar />
+            <div className="w-full grid grid-cols-1 xl:grid-cols-5 my-4 px-4">
                     {/* Sidebar */}
                     <div className="md:col-span-1 space-y-5">
                         <div className="nav-btns flex flex-col justify-start items-start space-y-4">
@@ -75,7 +72,6 @@ const SettingsPage = () => {
                     </div>
                 </div>
             </div>
-        </div>
     );
 };
 
