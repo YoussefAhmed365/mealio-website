@@ -77,8 +77,11 @@ export const AuthProvider = ({ children }) => {
     const logout = async () => {
         await fetch('http://localhost:5000/api/users/logout', {
             method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
         });
         setUser(null);
+        return { success: true };
     };
 
     return (

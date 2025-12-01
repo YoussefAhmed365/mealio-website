@@ -1,32 +1,22 @@
 // Components
-import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { Popover, PopoverPanel, PopoverButton } from '@headlessui/react'
+import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Popover, PopoverPanel, PopoverButton } from '@headlessui/react';
+import { useAuth } from '../../contexts/AuthContext';
 
 // Icons
-import { BellIcon } from '@heroicons/react/24/outline'
-import SearchField from '../../components/shared/Search'
+import { BellIcon } from '@heroicons/react/24/outline';
+import SearchField from '../../components/shared/Search';
 
 // Images
-import UserAvatar from '../../assets/images/avatar.webp'
+import UserAvatar from '../../assets/images/avatar.webp';
 
 const TopNavbar = () => {
-    const [userName, setUserName] = useState('');
+    // 1. Get the user object from AuthContext
+    const { user } = useAuth();
 
-    // Fetch user name (prevent double fetch in StrictMode)
-    useEffect(() => {
-        let didFetch = false;
-        if (!didFetch) {
-            fetch('/api/user')
-                .then(response => response.json())
-                .then(data => {
-                    setUserName(data.name);
-                    console.log("User data:", data);
-                })
-                .catch(error => console.error("Error fetching user data:", error));
-            didFetch = true;
-        }
-    }, []);
+    // 2. Derive the display name safely
+    const displayName = `${user.firstname} ${user.lastname}`;
 
     return (
         <nav className="bg-white shadow-md rounded-xl p-4 my-4 flex justify-between items-center" style={{ minWidth: "calc(100% - 32px)" }}>
@@ -59,7 +49,7 @@ const TopNavbar = () => {
                                 <div className="flex flex-row items-center space-x-4">
                                     <img src={UserAvatar} alt="User" className="w-16 h-16 rounded-full border-2 border-amber-600" />
                                     <div className="flex flex-col space-y-1">
-                                        <span className="font-semibold text-gray-800">{userName}</span>
+                                        <span className="font-semibold text-gray-800">{displayName}</span>
                                         <Link
                                             to="/profile"
                                             className="text-gray-600 hover:text-gray-900 transition"

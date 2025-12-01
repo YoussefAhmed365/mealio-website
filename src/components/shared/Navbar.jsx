@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import { NavLink, useNavigate, Outlet } from 'react-router-dom'
+import { useAuth } from '../../contexts/AuthContext'
+import { useLoading } from '../../contexts/LoadingContext';
 import '../../assets/css/Navbar.css'
 
 // Icons
@@ -61,6 +63,21 @@ const pages = [
 // Move isTrackNutrition state up to Navbar and pass as prop
 const Sidebar = ({ isCollapsed, setIsCollapsed, isTrackNutrition }) => {
     const navigate = useNavigate();
+    const { logout } = useAuth();
+    const { showLoading, hideLoading } = useLoading();
+
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        showLoading();
+
+        const result = await logout();
+
+        if (result.success) {
+            navigate('/');
+        }
+        hideLoading();
+    }
+
     const filteredPages = isTrackNutrition
         ? pages
         : pages.filter(page => page.name !== 'Nutrition Analysis');
@@ -103,15 +120,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isTrackNutrition }) => {
             {/* Logout Button */}
             <button
                 type="button"
-                onClick={async () => {
-                    try {
-                        await fetch('/api/logout', { method: 'POST', credentials: 'include' });
-                        navigate('/');
-                    } catch (error) {
-                        // Optionally handle error (e.g., show a toast)
-                        console.error('Logout failed', error);
-                    }
-                }}
+                onClick={handleLogout}
                 className="nav-link flex items-center gap-4 py-2 px-3 rounded-xl bg-transparent border-none outline-hidden cursor-pointer transition-colors duration-300 text-white hover:bg-gray-100 hover:text-amber-600"
             >
                 <div className="link-icon text-2xl text-gray-100">
