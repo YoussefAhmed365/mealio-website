@@ -1,33 +1,35 @@
 // Libraries
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import ProtectedRoute from './components/shared/ProtectedRoute';
 
 // Contexts
 // You have to use this import with showLoading() and hideLoading() functions from the context
 // import { useLoading } from '../contexts/LoadingContext'; <-- Use it inside any file where loading state is needed
 
 // pages
-import HomePage from './pages/HomePage'
-import LoginPage from './pages/LoginPage'
-import SignupPage from './pages/SignupPage'
-import RestoreAccountPage from './pages/RestoreAccountPage'
-import OTPPasswordResetPage from './pages/OTPPasswordResetPage'
-import OnboardingFlow from './pages/OnboardingPage'
-import { OnboardingProvider } from './contexts/OnboradingContext'
-import Dashboard from './pages/DashboardPage'
-import Plans from './pages/PlansPage'
-import Recipes from './pages/RecipesPage'
-import Shopping from './pages/ShoppingPage'
-import Discover from './pages/DiscoverPage'
-import MealDetail from './pages/MealDetailPage'
-import Analysis from './pages/AnalysisPage'
-import Settings from './pages/SettingsPage'
-import FaqPage from './pages/FaqPage'
-import ContactPage from './pages/ContactPage'
-import LegalPageLayout, { legalNavItems } from './pages/LegalPageLayout'
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
+import RestoreAccountPage from './pages/RestoreAccountPage';
+import OTPPasswordResetPage from './pages/OTPPasswordResetPage';
+import OnboardingFlow from './pages/OnboardingPage';
+import { OnboardingProvider } from './contexts/OnboradingContext';
+import Dashboard from './pages/DashboardPage';
+import Plans from './pages/PlansPage';
+import Recipes from './pages/RecipesPage';
+import Shopping from './pages/ShoppingPage';
+import Discover from './pages/DiscoverPage';
+import MealDetail from './pages/MealDetailPage';
+import Analysis from './pages/AnalysisPage';
+import Settings from './pages/SettingsPage';
+import FaqPage from './pages/FaqPage';
+import ContactPage from './pages/ContactPage';
+import LegalPageLayout, { legalNavItems } from './pages/LegalPageLayout';
 
 function App() {
     return (
-        <>
+        <AuthProvider>
             <OnboardingProvider>
                 <Routes>
                     <Route path='/' element={<HomePage />} />
@@ -36,14 +38,19 @@ function App() {
                     <Route path='/restore-account' element={<RestoreAccountPage />} />
                     <Route path='/reset-password' element={<OTPPasswordResetPage />} />
                     <Route path='/onboarding' element={<OnboardingFlow />} />
-                    <Route path='/main/home' element={<Dashboard />} />
-                    <Route path='/main/plans' element={<Plans />} />
-                    <Route path='/main/recipes' element={<Recipes />} />
-                    <Route path='/main/shopping-list' element={<Shopping />} />
-                    <Route path='/main/discover' element={<Discover />} />
-                    <Route path='/main/meal/:id' element={<MealDetail />} />
-                    <Route path='/main/analysis' element={<Analysis />} />
-                    <Route path='/main/settings' element={<Settings />} />
+
+                    {/* Protected Routes */}
+                    <Route element={<ProtectedRoute />}>
+                        <Route path='/main/home' element={<Dashboard />} />
+                        <Route path='/main/plans' element={<Plans />} />
+                        <Route path='/main/recipes' element={<Recipes />} />
+                        <Route path='/main/shopping-list' element={<Shopping />} />
+                        <Route path='/main/discover' element={<Discover />} />
+                        <Route path='/main/meal/:id' element={<MealDetail />} />
+                        <Route path='/main/analysis' element={<Analysis />} />
+                        <Route path='/main/settings' element={<Settings />} />
+                    </Route>
+
                     <Route path='/faq' element={<FaqPage />} />
                     <Route path='/contact' element={<ContactPage />} />
 
@@ -55,7 +62,7 @@ function App() {
                     </Route>
                 </Routes>
             </OnboardingProvider>
-        </>
+        </AuthProvider>
     );
 };
 

@@ -1,13 +1,45 @@
-import { Link } from "react-router-dom"
-import Field from "../components/shared/Field"
-import Button from "../components/shared/Button"
-import BackgroundImage from "../assets/images/login-signup-bg.webp"
-import GoogleIcon from "../assets/icons/Google"
-import MicrosoftIcon from "../assets/icons/Microsoft"
-import FacebookIcon from "../assets/icons/Facebook"
-import SparkleIcon from "../assets/icons/Sparkle"
+// Libraries
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import { Link } from "react-router-dom";
+
+// Components
+import Field from "../components/shared/Field";
+import Button from "../components/shared/Button";
+
+// Images & Icons
+import BackgroundImage from "../assets/images/login-signup-bg.webp";
+import GoogleIcon from "../assets/icons/Google";
+import MicrosoftIcon from "../assets/icons/Microsoft";
+import FacebookIcon from "../assets/icons/Facebook";
+import SparkleIcon from "../assets/icons/Sparkle";
+import { CheckIcon } from "@heroicons/react/24/solid";
 
 const LoginPage = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [remember, setRemember] = useState(false);
+    const navigate = useNavigate();
+    const { login } = useAuth();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const result = await login(email, password, remember);
+
+        if (result.success) {
+            navigate('/main/home');
+        } else {
+            setError(result.message);
+            setTimeout(() => {
+                setError("");
+            }, 5000);
+            clearTimeout();
+        }
+    };
+
     return (
         <div className="px-6 py-10 md:px-20 md:py-7 content-center h-auto md:h-screen">
             <div className="max-w-full mx-auto flex flex-col-reverse justify-center items-center gap-10 md:flex-row md:justify-between md:items-stretch md:gap-20">
@@ -16,14 +48,31 @@ const LoginPage = () => {
                     <h1 className="text-4xl font-bold">Welcome back!</h1>
                     <p className="text-gray-600 font-medium">To keep connected with us please login with your personal info</p>
 
-                    <form className="w-full flex flex-col justify-start items-center gap-2 mt-2">
-                        <Field label={'Email'} type='email' name={'email'} id={'email'} placeholder={'Your Email'} required />
-                        <Field label={'Password'} type='password' name={'password'} id={'password'} placeholder={'Your Password'} required />
+                    {/* Error Message Display */}
+                    <div className={`w-full text-center mt-2 p-3 bg-red-100 border border-red-400 text-red-700 rounded ${error ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}>
+                        {error}
+                    </div>
+
+                    <form onSubmit={handleSubmit} className="w-full flex flex-col justify-start items-center gap-2 mt-2">
+                        <Field label={'Email'} type='email' name={'email'} id={'email'} value={email} onChange={(e) => setEmail(e.target.value)} placeholder={'Your Email'} required />
+                        <Field label={'Password'} type='password' name={'password'} id={'password'} value={password} onChange={(e) => setPassword(e.target.value)} placeholder={'Your Password'} required />
                         <Button type='submit' className="mt-4" children='Sign In' />
                     </form>
 
-                    <div className="w-full mt-2 text-sm font-medium">
-                        <Link key={"restore-account"} to={"/restore-account"} className="text-amber-600 underline hover:text-amber-700 transition">Forgot your password?</Link>
+                    <div className="flex justify-between items-center w-full">
+                        <div className="mt-2 flex items-center gap-1">
+                            <label for="remember" class="flex flex-row items-center gap-2.5 text-gray-600 text-sm font-medium cursor-pointer">
+                                <input id="remember" type="checkbox" class="peer hidden" checked={remember} onChange={() => setRemember(!remember)}/>
+                                <div for="remember" class="h-5 w-5 flex rounded-md border border-[#a2a1a833] bg-white peer-checked:bg-amber-600 transition">
+                                    <CheckIcon className="size-5 text-white stroke-1 stroke-white" />
+                                </div>
+                                Remember Me
+                            </label>
+                        </div>
+
+                        <div className="text-sm font-medium">
+                            <Link key={"restore-account"} to={"/restore-account"} className="text-amber-600 underline hover:text-amber-700 transition">Forgot your password?</Link>
+                        </div>
                     </div>
 
                     <div className="w-full mt-4 flex justify-center items-center gap-x-2.5">

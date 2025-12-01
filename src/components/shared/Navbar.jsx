@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Routes, Route, NavLink } from 'react-router-dom'
+import { Routes, Route, NavLink, useNavigate } from 'react-router-dom'
 import '../../assets/css/Navbar.css'
 
 // Pages
@@ -69,6 +69,7 @@ const pages = [
 
 // Move isTrackNutrition state up to Navbar and pass as prop
 const Sidebar = ({ isCollapsed, setIsCollapsed, isTrackNutrition }) => {
+    const navigate = useNavigate();
     const filteredPages = isTrackNutrition
         ? pages
         : pages.filter(page => page.name !== 'Nutrition Analysis');
@@ -114,7 +115,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isTrackNutrition }) => {
                 onClick={async () => {
                     try {
                         await fetch('/api/logout', { method: 'POST', credentials: 'include' });
-                        window.location.href = '/login'
+                        navigate('/');
                     } catch (error) {
                         // Optionally handle error (e.g., show a toast)
                         console.error('Logout failed', error);

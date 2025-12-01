@@ -1,12 +1,57 @@
-import { Link } from "react-router-dom"
-import Field from "../components/shared/Field"
-import Button from "../components/shared/Button"
-import BackgroundImage from "../assets/images/login-signup-bg.webp"
-import GoogleIcon from "../assets/icons/Google"
-import MicrosoftIcon from "../assets/icons/Microsoft"
-import FacebookIcon from "../assets/icons/Facebook"
+// Libraries
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+
+// Components
+import Field from "../components/shared/Field";
+import Button from "../components/shared/Button";
+
+// Images & Icons
+import BackgroundImage from "../assets/images/login-signup-bg.webp";
+import GoogleIcon from "../assets/icons/Google";
+import MicrosoftIcon from "../assets/icons/Microsoft";
+import FacebookIcon from "../assets/icons/Facebook";
 
 const SignupPage = () => {
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState(""); // 👈 حقل جديد مهم
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false); // حالة التحميل
+
+    const { register } = useAuth(); // استخدام دالة التسجيل من الكونتكست
+    const navigate = useNavigate();
+
+    const handleSignup = async (e) => {
+        e.preventDefault();
+        setError("");
+
+        if (!firstName || !lastName || !email || !password) {
+            setError("All fields are required");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            setError("Passwords do not match");
+            return;
+        }
+
+        setLoading(true);
+
+        const result = await register(firstName, lastName, email, password);
+
+        setLoading(false);
+
+        if (result.success) {
+            navigate("/dashboard"); // التوجيه عند النجاح
+        } else {
+            setError(result.message); // عرض رسالة الخطأ من السيرفر
+        }
+    };
+
     return (
         <div className="px-6 py-10 md:px-20 md:py-7">
             <div className="max-w-full mx-auto flex flex-col-reverse justify-center items-center gap-10 md:flex-row md:justify-between md:items-stretch md:gap-20">
@@ -15,12 +60,22 @@ const SignupPage = () => {
                     <h1 className="text-4xl font-bold">Create a new account!</h1>
                     <p className="text-gray-600 font-medium">Join us now and try Meal.io to see the magic in planning</p>
 
-                    <form className="w-full flex flex-col justify-start items-center space-y-3 mt-2">
-                        <Field label={'First Name'} type='text' name={'first-name'} id={'first-name'} placeholder={'Your First Name'} required />
-                        <Field label={'Last Name'} type='text' name={'last-name'} id={'last-name'} placeholder={'Your Last Name'} required />
-                        <Field label={'Email'} type='email' name={'email'} id={'email'} placeholder={'Your Email'} required />
-                        <Field label={'Password'} type='password' name={'password'} id={'password'} placeholder={'Your Password'} required />
-                        <Button type='submit' className="mt-4" children='Sign Up' />
+                    {/* Error Message Display */}
+                    {error && (
+                        <div className="w-full text-center mt-2 p-3 bg-red-100 border border-red-400 text-red-700 rounded transition-opacity duration-300">
+                            {error}
+                        </div>
+                    )}
+
+                    <form onSubmit={handleSignup} className="w-full flex flex-col justify-start items-center space-y-3 mt-2">
+                        <div className="flex w-full justify-center items-center space-x-3">
+                            <Field label={'First Name'} className={"flex-1"} type='text' name={'first-name'} id={'first-name'} value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder={'Your First Name'} required />
+                            <Field label={'Last Name'} className={"flex-1"} type='text' name={'last-name'} id={'last-name'} value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder={'Your Last Name'} required />
+                        </div>
+                        <Field label={'Email'} type='email' name={'email'} id={'email'} value={email} onChange={(e) => setEmail(e.target.value)} placeholder={'Your Email'} required />
+                        <Field label={'Password'} type='password' name={'password'} id={'password'} value={password} onChange={(e) => setPassword(e.target.value)} placeholder={'Your Password'} required />
+                        <Field label={'Confirm Password'} type='password' name={'confirm-password'} id={'confirm-password'} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder={'Confirm Your Password'} required />
+                        <Button type='submit' className="mt-4" children='Sign Up' disabled={loading} />
                     </form>
 
                     <div className="w-full mt-4 flex justify-center items-center gap-x-2.5">
@@ -28,7 +83,7 @@ const SignupPage = () => {
                         <span className="text-slate-700">OR</span>
                         <span className="bg-slate-400 h-px w-full"></span>
                     </div>
-                    
+
                     <div className="w-full mt-2 flex justify-between items-center gap-5">
                         <button className="w-full py-4 border border-gray-400 rounded-md bg-transparent flex justify-center items-center text-gray-950 hover:bg-slate-100 transition duration-200">
                             <GoogleIcon className="size-7" />

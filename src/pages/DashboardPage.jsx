@@ -1,31 +1,30 @@
 // Components & Libraries
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react"
-import Navbar from '../components/shared/Navbar'
-import TopNavbar from '../components/shared/TopNavbar'
-import SearchField from '../components/shared/Search'
-import Button from '../components/shared/Button'
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
+import Navbar from '../components/shared/Navbar';
+import TopNavbar from '../components/shared/TopNavbar';
+import SearchField from '../components/shared/Search';
+import Button from '../components/shared/Button';
 
 //Images
-import MainSectionBG from '../assets/images/dashboard-bg.webp'
-import Bread from '../assets/images/food/red-bread-jam.jpg'
-import Chicken from '../assets/images/food/grilled-chicken.jpg'
-import Salad from '../assets/images/food/cashew-nut-salad.jpg'
+import MainSectionBG from '../assets/images/dashboard-bg.webp';
+import Bread from '../assets/images/food/red-bread-jam.jpg';
+import Chicken from '../assets/images/food/grilled-chicken.jpg';
+import Salad from '../assets/images/food/cashew-nut-salad.jpg';
 
 // Shopping List Images
-import Milk from '../assets/images/shop-items/milk.jpg'
-import Butter from '../assets/images/shop-items/butter.jpg'
-import Egg from '../assets/images/shop-items/egg.jpg'
-import Oil from '../assets/images/shop-items/oil.jpg'
+import Milk from '../assets/images/shop-items/milk.jpg';
+import Butter from '../assets/images/shop-items/butter.jpg';
+import Egg from '../assets/images/shop-items/egg.jpg';
+import Oil from '../assets/images/shop-items/oil.jpg';
 
 // Icons
-import StopwatchIcon from '../assets/icons/Stopwatch'
-import { FireIcon, PencilSquareIcon as EditSolid, PlusIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/solid'
-import { PencilSquareIcon as EditOutline } from '@heroicons/react/24/outline'
+import StopwatchIcon from '../assets/icons/Stopwatch';
+import { FireIcon, PencilSquareIcon as EditSolid, PlusIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
+import { PencilSquareIcon as EditOutline } from '@heroicons/react/24/outline';
 
 const Dashboard = () => {
-
     // Track which row is hovered
     const [hoveredRow, setHoveredRow] = useState(null);
     const rows = [
