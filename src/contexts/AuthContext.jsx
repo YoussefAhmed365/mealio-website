@@ -4,14 +4,10 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-
-    // Check for user login on app start
-    useEffect(() => {
-        checkUserLoggedIn();
-    }, []);
+    const [isLoading, setIsLoading] = useState(false);
 
     const checkUserLoggedIn = async () => {
+        setIsLoading(true);
         try {
             const res = await fetch('http://localhost:5000/api/users/profile', {
                 method: 'GET',
@@ -34,17 +30,17 @@ export const AuthProvider = ({ children }) => {
     // Signup Handler
     const register = async (firstName, lastName, email, password) => {
         try {
-            const res = await fetch('http://localhost:5000/api/users/register', { // 👈 تأكد من المنفذ 5000
+            const res = await fetch('http://localhost:5000/api/users/register', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' }, // 👈 هذا السطر ضروري جداً
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ firstName, lastName, email, password }),
-                credentials: 'include', // لكي يستلم الكوكيز فوراً
+                credentials: 'include',
             });
 
             const data = await res.json();
 
             if (res.ok) {
-                setUser(data); // تسجيل الدخول مباشرة بعد الإنشاء
+                setUser(data); // Login after signing up
                 return { success: true };
             } else {
                 return { success: false, message: data.message || 'Registration failed' };
@@ -85,7 +81,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, register, login, logout, isLoading }}>
+        <AuthContext.Provider value={{ user, register, login, logout, isLoading, checkUserLoggedIn }}>
             {children}
         </AuthContext.Provider>
     );

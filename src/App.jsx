@@ -42,15 +42,15 @@ function App() {
 
                     {/* Protected Routes */}
                     <Route element={<ProtectedRoute />}>
-                        <Route element={<Navbar />}>
-                            <Route path='/main/home' element={<Dashboard />} />
-                            <Route path='/main/plans' element={<Plans />} />
-                            <Route path='/main/recipes' element={<Recipes />} />
-                            <Route path='/main/shopping-list' element={<Shopping />} />
-                            <Route path='/main/discover' element={<Discover />} />
-                            <Route path='/main/meal/:id' element={<MealDetail />} />
-                            <Route path='/main/analysis' element={<Analysis />} />
-                            <Route path='/main/settings' element={<Settings />} />
+                        <Route path="/main" element={<Navbar />}>
+                            <Route path='home' element={<Dashboard />} />
+                            <Route path='plans' element={<Plans />} />
+                            <Route path='recipes' element={<Recipes />} />
+                            <Route path='shopping-list' element={<Shopping />} />
+                            <Route path='discover' element={<Discover />} />
+                            <Route path='meal/:id' element={<MealDetail />} />
+                            <Route path='analysis' element={<Analysis />} />
+                            <Route path='settings' element={<Settings />} />
                         </Route>
                     </Route>
 
