@@ -61,9 +61,9 @@ const LoginPage = () => {
 
                     <div className="flex justify-between items-center w-full">
                         <div className="mt-2 flex items-center gap-1">
-                            <label for="remember" class="flex flex-row items-center gap-2.5 text-gray-600 text-sm font-medium cursor-pointer">
+                            <label htmlFor="remember" className="flex flex-row items-center gap-2.5 text-gray-600 text-sm font-medium cursor-pointer">
                                 <input id="remember" type="checkbox" className="peer hidden" checked={remember} onChange={() => setRemember(!remember)}/>
-                                <div htmlFor="remember" class="h-5 w-5 flex rounded-md border border-[#a2a1a833] bg-white peer-checked:bg-amber-600 transition">
+                                <div htmlFor="remember" className="h-5 w-5 flex rounded-md border border-[#a2a1a833] bg-white peer-checked:bg-amber-600 transition">
                                     <CheckIcon className="size-5 text-white stroke-1 stroke-white" />
                                 </div>
                                 Remember Me
