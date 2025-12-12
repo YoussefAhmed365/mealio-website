@@ -18,6 +18,7 @@ const RestoreAccountPage = lazy(() => import('./pages/RestoreAccountPage'));
 const OTPPasswordResetPage = lazy(() => import('./pages/OTPPasswordResetPage'));
 const OnboardingFlow = lazy(() => import('./pages/OnboardingPage'));
 import { OnboardingProvider } from './contexts/OnboradingContext';
+import { NotificationProvider } from './contexts/NotificationContext';
 const Dashboard = lazy(() => import('./pages/DashboardPage'));
 const Plans = lazy(() => import('./pages/PlansPage'));
 const Recipes = lazy(() => import('./pages/RecipesPage'));
@@ -34,40 +35,42 @@ function App() {
     return (
         <AuthProvider>
             <OnboardingProvider>
-                <Suspense fallback={<LoadingScreen />}>
-                    <Routes>
-                        <Route path='/' element={<HomePage />} />
-                        <Route path='/login' element={<LoginPage />} />
-                        <Route path='/signup' element={<SignupPage />} />
-                        <Route path='/restore-account' element={<RestoreAccountPage />} />
-                        <Route path='/reset-password' element={<OTPPasswordResetPage />} />
-                        <Route path='/onboarding' element={<OnboardingFlow />} />
+                <NotificationProvider>
+                    <Suspense fallback={<LoadingScreen />}>
+                        <Routes>
+                            <Route path='/' element={<HomePage />} />
+                            <Route path='/login' element={<LoginPage />} />
+                            <Route path='/signup' element={<SignupPage />} />
+                            <Route path='/restore-account' element={<RestoreAccountPage />} />
+                            <Route path='/reset-password' element={<OTPPasswordResetPage />} />
+                            <Route path='/onboarding' element={<OnboardingFlow />} />
 
-                        {/* Protected Routes */}
-                        <Route element={<ProtectedRoute />}>
-                            <Route path="/main" element={<Navbar />}>
-                                <Route path='home' element={<Dashboard />} />
-                                <Route path='plans' element={<Plans />} />
-                                <Route path='recipes' element={<Recipes />} />
-                                <Route path='shopping-list' element={<Shopping />} />
-                                <Route path='discover' element={<Discover />} />
-                                <Route path='meal/:id' element={<MealDetail />} />
-                                <Route path='analysis' element={<Analysis />} />
-                                <Route path='settings' element={<Settings />} />
+                            {/* Protected Routes */}
+                            <Route element={<ProtectedRoute />}>
+                                <Route path="/main" element={<Navbar />}>
+                                    <Route path='home' element={<Dashboard />} />
+                                    <Route path='plans' element={<Plans />} />
+                                    <Route path='recipes' element={<Recipes />} />
+                                    <Route path='shopping-list' element={<Shopping />} />
+                                    <Route path='discover' element={<Discover />} />
+                                    <Route path='meal/:id' element={<MealDetail />} />
+                                    <Route path='analysis' element={<Analysis />} />
+                                    <Route path='settings' element={<Settings />} />
+                                </Route>
                             </Route>
-                        </Route>
 
-                        <Route path='/faq' element={<FaqPage />} />
-                        <Route path='/contact' element={<ContactPage />} />
+                            <Route path='/faq' element={<FaqPage />} />
+                            <Route path='/contact' element={<ContactPage />} />
 
-                        <Route path="/legal" element={<LegalPageLayout />}>
-                            <Route index element={<Navigate to="/legal/privacy" replace />} />
-                            {legalNavItems.map(item => (
-                                <Route key={item.id} path={item.path.replace('/legal/', '')} element={item.component} />
-                            ))}
-                        </Route>
-                    </Routes>
-                </Suspense>
+                            <Route path="/legal" element={<LegalPageLayout />}>
+                                <Route index element={<Navigate to="/legal/privacy" replace />} />
+                                {legalNavItems.map(item => (
+                                    <Route key={item.id} path={item.path.replace('/legal/', '')} element={item.component} />
+                                ))}
+                            </Route>
+                        </Routes>
+                    </Suspense>
+                </NotificationProvider>
             </OnboardingProvider>
         </AuthProvider>
     );

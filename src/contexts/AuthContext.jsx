@@ -4,10 +4,9 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const checkUserLoggedIn = async () => {
-        setIsLoading(true);
         try {
             const res = await fetch('http://localhost:5000/api/users/profile', {
                 method: 'GET',
@@ -26,6 +25,10 @@ export const AuthProvider = ({ children }) => {
             setIsLoading(false);
         }
     };
+
+    useEffect(() => {
+        checkUserLoggedIn();
+    }, []);
 
     // Signup Handler
     const register = async (firstName, lastName, email, password) => {
