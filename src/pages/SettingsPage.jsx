@@ -1,7 +1,4 @@
-// ============================
 // Imports
-// ============================
-
 import { useState } from "react"
 import TopNavbar from "../components/shared/TopNavbar"
 import Button from "../components/shared/Button"
@@ -17,10 +14,6 @@ import HelpSupportForm from "../components/settings/HelpSupportForm"
 // Styles
 import "../assets/css/SettingsPage.css"
 
-// ============================
-// Constants
-// ============================
-
 const NAV_BUTTONS = [
     "Profile Information",
     "Meal Preferences",
@@ -29,10 +22,6 @@ const NAV_BUTTONS = [
     "Notifications",
     "Help & Support",
 ];
-
-// ============================
-// Component
-// ============================
 
 const SettingsPage = () => {
     const [active, setActive] = useState(0);

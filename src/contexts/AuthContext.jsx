@@ -6,11 +6,12 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
+    // Check for user login
     const checkUserLoggedIn = async () => {
         try {
             const res = await fetch('http://localhost:5000/api/users/profile', {
                 method: 'GET',
-                credentials: 'include', // Send cookies
+                credentials: 'include',
             });
 
             if (res.ok) {
@@ -25,6 +26,7 @@ export const AuthProvider = ({ children }) => {
             setIsLoading(false);
         }
     };
+
 
     useEffect(() => {
         checkUserLoggedIn();
@@ -83,8 +85,33 @@ export const AuthProvider = ({ children }) => {
         return { success: true };
     };
 
+    const updateProfile = async (userData) => {
+        setIsLoading(true);
+        try {
+            const res = await fetch("http://localhost:5000/api/users/profile", {
+                method: 'PUT',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(userData),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) throw new Error(data.message || "Update failed");
+
+            // Update state and local storage with new info
+            setUser(data);
+            localStorage.setItem("userInfo", JSON.stringify(data));
+
+            return { success: true, message: "Profile updated successfully" };
+        } catch (error) {
+            return { success: false, message: error.message };
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
-        <AuthContext.Provider value={{ user, register, login, logout, isLoading, checkUserLoggedIn }}>
+        <AuthContext.Provider value={{ user, register, login, logout, isLoading, checkUserLoggedIn, updateProfile }}>
             {children}
         </AuthContext.Provider>
     );

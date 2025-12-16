@@ -89,7 +89,7 @@ const TopNavbar = () => {
                                     <div className="flex flex-col space-y-1">
                                         <span className="font-semibold text-gray-800">{displayName}</span>
                                         <Link
-                                            to="/profile"
+                                            to="/main/settings"
                                             className="text-gray-600 hover:text-gray-900 transition"
                                         >
                                             View Profile
