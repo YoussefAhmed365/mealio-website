@@ -33,12 +33,12 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     // Signup Handler
-    const register = async (firstName, lastName, email, password) => {
+    const register = async (firstname, lastname, email, password) => {
         try {
             const res = await fetch('http://localhost:5000/api/users/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ firstName, lastName, email, password }),
+                body: JSON.stringify({ firstname, lastname, email, password }),
                 credentials: 'include',
             });
 
@@ -110,8 +110,32 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    // Complete Onboarding Handler
+    const completeOnboarding = async (onboardingData) => {
+        setIsLoading(true);
+        try {
+            const res = await fetch('http://localhost:5000/api/meal-preferences', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(onboardingData),
+                credentials: 'include',
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) throw new Error(data.message || "Failed to save onboarding data");
+
+            setUser(data); // Update user with new preferences
+            return { success: true };
+        } catch (error) {
+            return { success: false, message: error.message };
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
-        <AuthContext.Provider value={{ user, register, login, logout, isLoading, checkUserLoggedIn, updateProfile }}>
+        <AuthContext.Provider value={{ user, register, login, logout, isLoading, checkUserLoggedIn, updateProfile, completeOnboarding }}>
             {children}
         </AuthContext.Provider>
     );

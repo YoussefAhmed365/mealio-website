@@ -1,7 +1,10 @@
-import React, { createContext, useState, useContext, useEffect } from 'react'
-import ChevronLeft from '../assets/icons/ChevronLeft'
-import ChevronDown from '../assets/icons/ChevronDown'
-import UserIcon from '../assets/icons/User'
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+import AnimatedBackground from '../animations/AnimatedBackground';
+import ChevronLeft from '../assets/icons/ChevronLeft';
+import ChevronDown from '../assets/icons/ChevronDown';
+import UserIcon from '../assets/icons/User';
 
 // --- ONBOARDING CONTEXT ---
 const OnboardingContext = createContext(null);
@@ -10,7 +13,7 @@ export const OnboardingProvider = ({ children }) => {
     const [currentStep, setCurrentStep] = useState(0);
     const [onboardingData, setOnboardingData] = useState({
         preferences: null,
-        numPeople: 1,
+        persons: 1,
         allergies: {},
         budget: null,
         trackingOption: null,
@@ -87,7 +90,7 @@ const StepIndicator = () => {
 
 const OnboardingStep = ({ title, subtitle, children, onNext, onBack, isNextDisabled, isLastStep = false }) => {
     return (
-        <div className="bg-white rounded-xs shadow-lg p-8 w-full max-w-2xl transition-all duration-500">
+        <div className="bg-white rounded-xl shadow p-8 w-full max-w-2xl transition-all duration-500">
             <div className="text-center mb-8">
                 <h1 className="text-3xl font-bold text-gray-800">{title}</h1>
                 <p className="text-gray-500 mt-2">{subtitle}</p>
@@ -153,13 +156,13 @@ const DietaryPreferences = () => {
     );
 };
 
-const NumberOfPeople = () => {
+const NumberOfPersons = () => {
     const { onboardingData, updateData, nextStep, prevStep } = useOnboarding();
-    const { numPeople } = onboardingData;
+    const { persons } = onboardingData;
 
     const handleUpdate = (amount) => {
-        const newValue = Math.max(1, Math.min(10, numPeople + amount));
-        updateData({ numPeople: newValue });
+        const newValue = Math.max(1, Math.min(10, persons + amount));
+        updateData({ persons: newValue });
     };
 
     return (
@@ -172,7 +175,7 @@ const NumberOfPeople = () => {
             <div className="flex items-center justify-center gap-6 my-8">
                 <button onClick={() => handleUpdate(-1)} className="w-14 h-14 flex items-center justify-center text-3xl font-bold bg-gray-100 text-gray-600 rounded-full hover:bg-gray-200 transition-colors">-</button>
                 <div className="flex flex-col items-center">
-                    <span className="text-7xl font-bold text-amber-600">{numPeople}</span>
+                    <span className="text-7xl font-bold text-amber-600">{persons}</span>
                     <span className="text-lg text-gray-500">People</span>
                 </div>
                 <button onClick={() => handleUpdate(1)} className="w-14 h-14 flex items-center justify-center text-3xl font-bold bg-gray-100 text-gray-600 rounded-full hover:bg-gray-200 transition-colors">+</button>
@@ -184,7 +187,7 @@ const NumberOfPeople = () => {
 
 const FoodAllergies = () => {
     const { onboardingData, updateData, nextStep, prevStep } = useOnboarding();
-    const { numPeople, allergies } = onboardingData;
+    const { persons, allergies } = onboardingData;
     const [openPersonIndex, setOpenPersonIndex] = useState(0);
 
     const ALLERGY_OPTIONS = ["Peanut", "Milk", "Egg", "Fish", "Soy", "Gluten"];
@@ -192,18 +195,18 @@ const FoodAllergies = () => {
     useEffect(() => {
         const newAllergies = { ...allergies };
         let needsUpdate = false;
-        
+
         // Ensure allergy data matches number of people
-        for (let i = 0; i < numPeople; i++) {
+        for (let i = 0; i < persons; i++) {
             if (newAllergies[i] === undefined) {
                 newAllergies[i] = [];
                 needsUpdate = true;
             }
         }
-        
+
         // Clean up data for people who were removed
         Object.keys(newAllergies).forEach(key => {
-            if (parseInt(key) >= numPeople) {
+            if (parseInt(key) >= persons) {
                 delete newAllergies[key];
                 needsUpdate = true;
             }
@@ -212,14 +215,14 @@ const FoodAllergies = () => {
         if (needsUpdate) {
             updateData({ allergies: newAllergies });
         }
-    }, [numPeople, allergies, updateData]);
+    }, [persons, allergies, updateData]);
 
     const handleToggleAllergy = (personIndex, allergy) => {
         const currentPersonAllergies = allergies[personIndex] || [];
         const newPersonAllergies = currentPersonAllergies.includes(allergy)
             ? currentPersonAllergies.filter(a => a !== allergy)
             : [...currentPersonAllergies, allergy];
-        
+
         updateData({
             allergies: {
                 ...allergies,
@@ -236,7 +239,7 @@ const FoodAllergies = () => {
             onBack={prevStep}
         >
             <div className="space-y-2 overflow-y-scroll max-h-[292px]">
-                {Array.from({ length: numPeople }).map((_, index) => {
+                {Array.from({ length: persons }).map((_, index) => {
                     const personAllergies = allergies[index] || [];
                     const isOpen = openPersonIndex === index;
                     return (
@@ -252,7 +255,7 @@ const FoodAllergies = () => {
                                         {!isOpen && personAllergies.length > 0 && (
                                             <span className="text-xs text-gray-500 mt-1">{personAllergies.join(', ')}</span>
                                         )}
-                                         {!isOpen && personAllergies.length === 0 && (
+                                        {!isOpen && personAllergies.length === 0 && (
                                             <span className="text-xs text-gray-500 mt-1">No Allergies</span>
                                         )}
                                     </div>
@@ -317,11 +320,35 @@ const Budget = () => {
 
 const TrackingOption = () => {
     const { onboardingData, updateData, prevStep } = useOnboarding();
+    const { completeOnboarding } = useAuth();
     const options = ["Track Calories", "Track Macros", "Track Ingredients", "No Tracking"];
-    
-    const handleFinish = () => {
-        console.log("Onboarding Complete:", onboardingData);
-        alert("Onboarding Complete! Check the console for the final data.");
+    const navigate = useNavigate();
+
+    const handleFinish = async (e) => {
+        e.preventDefault();
+
+        // Transform data to match backend schema
+        const personsMap = {};
+        for (let i = 0; i < onboardingData.persons; i++) {
+            personsMap[`person${i + 1}`] = {
+                name: `Person ${i + 1}`,
+                allergies: onboardingData.allergies[i] || []
+            };
+        }
+
+        const dataToSave = {
+            ...onboardingData,
+            persons: personsMap,
+            // Remove the top-level allergies object as it's now distributed inside persons
+            allergies: undefined
+        };
+
+        const result = await completeOnboarding(dataToSave);
+        if (result.success) {
+            navigate('/main/home');
+        } else {
+            console.log(result.message || "An error occurred while saving your preferences.");
+        }
     };
 
     return (
@@ -335,7 +362,7 @@ const TrackingOption = () => {
         >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {options.map(option => (
-                     <OptionButton
+                    <OptionButton
                         key={option}
                         label={option}
                         isSelected={onboardingData.trackingOption === option}
@@ -355,17 +382,18 @@ const OnboardingFlow = () => {
 
     const steps = [
         <DietaryPreferences />,
-        <NumberOfPeople />,
+        <NumberOfPersons />,
         <FoodAllergies />,
         <Budget />,
         <TrackingOption />
     ];
 
     return (
-        <div className="bg-gradient-to-b from-gray-50 to-white min-h-screen flex flex-col justify-center items-center p-4">
+        <div className="relative min-h-screen flex flex-col justify-center items-center p-4">
+            <AnimatedBackground />
             <StepIndicator />
             <div className="relative w-full max-w-2xl" style={{ height: '520px' }}>
-                 {steps.map((step, index) => (
+                {steps.map((step, index) => (
                     <div
                         key={index}
                         className="absolute w-full transition-all duration-500"
@@ -386,9 +414,9 @@ const OnboardingFlow = () => {
 
 // --- APP ---
 export default function App() {
-  return (
-    <OnboardingProvider>
-        <OnboardingFlow />
-    </OnboardingProvider>
-  )
+    return (
+        <OnboardingProvider>
+            <OnboardingFlow />
+        </OnboardingProvider>
+    )
 }

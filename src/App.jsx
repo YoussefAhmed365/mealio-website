@@ -43,10 +43,18 @@ function App() {
                             <Route path='/signup' element={<SignupPage />} />
                             <Route path='/restore-account' element={<RestoreAccountPage />} />
                             <Route path='/reset-password' element={<OTPPasswordResetPage />} />
-                            <Route path='/onboarding' element={<OnboardingFlow />} />
+                            <Route path='/faq' element={<FaqPage />} />
+                            <Route path='/contact' element={<ContactPage />} />
+                            <Route path="/legal" element={<LegalPageLayout />}>
+                                <Route index element={<Navigate to="/legal/privacy" replace />} />
+                                {legalNavItems.map(item => (
+                                    <Route key={item.id} path={item.path.replace('/legal/', '')} element={item.component} />
+                                ))}
+                            </Route>
 
                             {/* Protected Routes */}
                             <Route element={<ProtectedRoute />}>
+                                <Route path='/get-started' element={<OnboardingFlow />} />
                                 <Route path="/main" element={<Navbar />}>
                                     <Route path='home' element={<Dashboard />} />
                                     <Route path='plans' element={<Plans />} />
@@ -57,16 +65,6 @@ function App() {
                                     <Route path='analysis' element={<Analysis />} />
                                     <Route path='settings' element={<Settings />} />
                                 </Route>
-                            </Route>
-
-                            <Route path='/faq' element={<FaqPage />} />
-                            <Route path='/contact' element={<ContactPage />} />
-
-                            <Route path="/legal" element={<LegalPageLayout />}>
-                                <Route index element={<Navigate to="/legal/privacy" replace />} />
-                                {legalNavItems.map(item => (
-                                    <Route key={item.id} path={item.path.replace('/legal/', '')} element={item.component} />
-                                ))}
                             </Route>
                         </Routes>
                     </Suspense>

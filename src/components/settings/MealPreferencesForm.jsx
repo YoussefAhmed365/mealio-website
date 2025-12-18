@@ -59,7 +59,7 @@ const MealPreferencesForm = () => {
         <>
             {/* Persons */}
             <div className="mb-6 flex flex-col justify-start items-center">
-                <label className="block text-gray-700 font-medium mb-4">Family Persons</label>
+                <span className="block text-gray-700 font-medium mb-4">Family Persons</span>
                 <div className="flex justify-start items-center gap-6">
                     <button onClick={() => handleUpdate(-1)} className="w-10 h-10 flex items-center justify-center text-2xl font-bold bg-gray-200 text-gray-600 rounded-full">-</button>
                     <span className="text-4xl font-bold text-amber-600">{numPeople}</span>
@@ -69,10 +69,10 @@ const MealPreferencesForm = () => {
 
             {/* Allergies */}
             <div className="mb-6">
-                <label className="block text-gray-700 font-medium mb-2">Allergies</label>
-                <div className="space-y-5">
+                <span className="block text-gray-700 font-medium mb-2">Allergies</span>
+                <div className="space-x-5 flex justify-start items-center overflow-x-scroll">
                     {peopleAllergies.map((person, i) => (
-                        <div key={i} className="p-4 border rounded-lg bg-gray-50/50">
+                        <div key={i} className="p-4 border-2 rounded-lg border-slate-400 min-w-[468px] w-[468px]">
                             <input
                                 type="text"
                                 value={person.name}
@@ -98,7 +98,7 @@ const MealPreferencesForm = () => {
 
             {/* Dietary Preferences */}
             <div className="mb-8 p-6 border rounded-lg bg-gray-50/50">
-                <label className="block text-gray-700 font-medium mb-2">Dietary Preferences</label>
+                <span className="block text-gray-700 font-medium mb-2">Dietary Preferences</span>
                 <div className="flex flex-wrap gap-2">
                     {["Vegetarian", "Vegan", "Pescatarian", "Keto", "Paleo", "Gluten-Free", "No Preference"].map((pref, i) => (
                         <Button key={i} styleType={dietaryPreferences.includes(pref) ? "primary" : "outline"} className={"max-w-fit"} onClick={() => handleDietaryToggle(pref)}>
@@ -110,7 +110,7 @@ const MealPreferencesForm = () => {
 
             {/* Tracking Preferences */}
             <div className="mb-8 p-6 border rounded-lg bg-gray-50/50">
-                <label className="block text-gray-700 font-medium mb-2">Tracking Preferences</label>
+                <span className="block text-gray-700 font-medium mb-2">Tracking Preferences</span>
                 <div className="flex flex-wrap gap-2">
                     {["Track Calories", "Track Macros", "Track Ingredients", "No Tracking"].map((tracking, i) => (
                         <Button key={i} styleType={trackingPreference === tracking ? "primary" : "outline"} className={"max-w-fit"} onClick={() => setTrackingPreference(tracking)}>
@@ -122,22 +122,22 @@ const MealPreferencesForm = () => {
 
             {/* Cultural Cuisine */}
             <div className="mb-8 p-6 border rounded-lg bg-gray-50/50">
-                <label className="block text-gray-700 font-medium mb-2">Cultural Cuisine</label>
+                <span className="block text-gray-700 font-medium mb-2">Cultural Cuisine</span>
                 <Field value={culturalCuisine} onChange={(e) => setCulturalCuisine(e.target.value)} placeholder="e.g., Italian, Japanese, Mediterranean" />
             </div>
 
             {/* Unit of Measurement */}
             <div className="mb-8 p-6 border rounded-lg bg-gray-50/50">
-                <label className="block text-gray-700 font-medium mb-2">Unit of Measurement</label>
+                <span className="block text-gray-700 font-medium mb-2">Unit of Measurement</span>
                 <div className="flex flex-col md:flex-row items-start md:items-center md:space-x-4 space-y-4 md:space-y-0">
-                    <label className="flex items-center">
+                    <span className="flex items-center">
                         <input type="radio" value="metric" checked={unitOfMeasurement === "metric"} onChange={(e) => setUnitOfMeasurement(e.target.value)} />
                         <span className="ml-2">Metric (g, L)</span>
-                    </label>
-                    <label className="flex items-center">
+                    </span>
+                    <span className="flex items-center">
                         <input type="radio" value="imperial" checked={unitOfMeasurement === "imperial"} onChange={(e) => setUnitOfMeasurement(e.target.value)} />
                         <span className="ml-2">Imperial (oz, lbs)</span>
-                    </label>
+                    </span>
                 </div>
             </div>
 

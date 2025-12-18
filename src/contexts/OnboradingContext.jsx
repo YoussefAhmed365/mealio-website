@@ -4,21 +4,21 @@ const OnboardingContext = createContext(null);
 
 export const OnboardingProvider = ({ children }) => {
     const [currentStep, setCurrentStep] = useState(1);
+    const totalSteps = 5; // Onboarding Pages Count
     const [preferences, setPreferences] = useState(null);
-    const [numPeople, setNumPeople] = useState(1);
+    const [persons, setPersons] = useState(1);
     const [allergies, setAllergies] = useState([]);
     const [budget, setBudget] = useState(null);
     const [trackingOption, setTrackingOption] = useState(null);
-    const totalSteps = 5; // Onboarding Pages Count
 
     const value = {
         currentStep,
-        totalSteps,
         setCurrentStep,
+        totalSteps,
         preferences,
         setPreferences,
-        numPeople,
-        setNumPeople,
+        persons,
+        setPersons,
         allergies,
         setAllergies,
         budget,

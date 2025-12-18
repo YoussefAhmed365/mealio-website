@@ -18,11 +18,10 @@ const SignupPage = () => {
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState(""); // 👈 حقل جديد مهم
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false); // حالة التحميل
-
-    const { register } = useAuth(); // استخدام دالة التسجيل من الكونتكست
+    const [loading, setLoading] = useState(false);
+    const { register } = useAuth();
     const navigate = useNavigate();
 
     const handleSignup = async (e) => {
@@ -46,9 +45,9 @@ const SignupPage = () => {
         setLoading(false);
 
         if (result.success) {
-            navigate("/dashboard"); // التوجيه عند النجاح
+            navigate("/get-started");
         } else {
-            setError(result.message); // عرض رسالة الخطأ من السيرفر
+            setError(result.message);
         }
     };
 
