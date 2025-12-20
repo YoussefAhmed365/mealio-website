@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect, useContext } from 'react';
 
 const AuthContext = createContext();
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/$/, '');
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -93,6 +93,7 @@ export const AuthProvider = ({ children }) => {
                 method: 'PUT',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(userData),
+                credentials: 'include',
             });
 
             const data = await res.json();
