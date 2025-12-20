@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect, useContext } from 'react';
 
 const AuthContext = createContext();
+const API_URL = process.env.VITE_API_URL || 'http://localhost:5000';
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -9,7 +10,7 @@ export const AuthProvider = ({ children }) => {
     // Check for user login
     const checkUserLoggedIn = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/users/profile', {
+            const res = await fetch(`${API_URL}/api/users/profile`, {
                 method: 'GET',
                 credentials: 'include',
             });
@@ -35,7 +36,7 @@ export const AuthProvider = ({ children }) => {
     // Signup Handler
     const register = async (firstname, lastname, email, password) => {
         try {
-            const res = await fetch('http://localhost:5000/api/users/register', {
+            const res = await fetch(`${API_URL}/api/users/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ firstname, lastname, email, password }),
@@ -57,7 +58,7 @@ export const AuthProvider = ({ children }) => {
 
     // Login Handler
     const login = async (email, password, remember) => {
-        const res = await fetch('http://localhost:5000/api/users/login', {
+        const res = await fetch(`${API_URL}/api/users/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password, remember }),
@@ -76,7 +77,7 @@ export const AuthProvider = ({ children }) => {
 
     // Logout Handler
     const logout = async () => {
-        await fetch('http://localhost:5000/api/users/logout', {
+        await fetch(`${API_URL}/api/users/logout`, {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
@@ -88,7 +89,7 @@ export const AuthProvider = ({ children }) => {
     const updateProfile = async (userData) => {
         setIsLoading(true);
         try {
-            const res = await fetch("http://localhost:5000/api/users/profile", {
+            const res = await fetch(`${API_URL}/api/users/profile`, {
                 method: 'PUT',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(userData),
@@ -114,7 +115,7 @@ export const AuthProvider = ({ children }) => {
     const completeOnboarding = async (onboardingData) => {
         setIsLoading(true);
         try {
-            const res = await fetch('http://localhost:5000/api/meal-preferences', {
+            const res = await fetch(`${API_URL}/api/meal-preferences`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(onboardingData),
