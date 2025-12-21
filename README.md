@@ -1,16 +1,78 @@
-# React + Vite
+# Mealio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Mealio is a comprehensive meal planning and recipe management application designed to help users organize their dietary habits. It features a modern, user-friendly interface that allows users to track meals, discover new recipes, manage shopping lists, and analyze their nutritional intake.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Authentication System**: Secure user login, signup, password reset, and account restoration.
+- **Onboarding Flow**: Personalized setup to tailor the experience to user preferences.
+- **Dashboard**: A central hub for viewing daily meals and activities.
+- **Meal Planning**: Organize weekly or monthly meal plans with ease.
+- **Recipe Management**: Browse, view, and manage your favorite recipes.
+- **Recipe Discovery**: Find new and exciting meal ideas.
+- **Shopping List**: Automatically generate and manage grocery lists based on your meal plans.
+- **Nutritional Analysis**: Track and analyze your nutritional intake.
+- **User Settings**: Customize your profile and application settings.
+- **Legal & Support**: Access FAQs, contact support, and view legal information (Privacy Policy, Terms, etc.).
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- **Frontend Framework**: React (via Vite)
+- **Routing**: React Router
+- **Styling**: Tailwind CSS, Material UI
+- **Components**: Headless UI, Heroicons
+- **Charts**: MUI X Charts
+- **Animations**: Lottie Files
+- **State Management**: React Context API
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd mealio
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+## Usage
+
+### Development Server
+To start the development server with Hot Module Replacement (HMR):
+```bash
+npm run dev
+```
+The application will be available at `http://localhost:5173` (or the port shown in your terminal).
+
+### Build for Production
+To build the application for production:
+```bash
+npm run build
+```
+
+### Linting
+To run the ESLint configuration:
+```bash
+npm run lint
+```
+
+## Project Structure
+
+```
+src/
+├── animations/       # Lottie animation files
+├── assets/           # Static assets (images, fonts, etc.)
+├── components/       # Reusable React components
+│   └── shared/       # Shared components like Navbar, LoadingScreen
+├── contexts/         # React Context providers (Auth, Onboarding, etc.)
+├── pages/            # Application page components (Dashboard, Recipes, etc.)
+├── App.jsx           # Main application component with routing
+└── main.jsx          # Entry point
+```
+
+## License
+
+This project is private and proprietary.
