@@ -300,7 +300,7 @@ const Dashboard = () => {
                                 <SearchField containerClassName={"w-full py-3"} />
                                 <Button
                                     onClick={handleAddIngredient}
-                                    className="flex items-center space-x-2 min-w-auto"
+                                    className="flex items-center space-x-2 max-w-fit"
                                 >
                                     <PlusIcon className="size-5" />
                                     <span>Add Ingredient</span>
@@ -313,14 +313,14 @@ const Dashboard = () => {
                             {filteredIngredients.map((ing) => (
                                 <div
                                     key={ing.id}
-                                    className="bg-white rounded-lg shadow-sm p-4 flex flex-col justify-between"
+                                    className="bg-white rounded-lg shadow-sm p-6 flex flex-col justify-between"
                                 >
                                     <div>
                                         <h2 className="text-xl font-bold text-gray-800">{ing.name}</h2>
                                         <p className="text-sm text-gray-500">{ing.category}</p>
                                         <p className="text-gray-700 mt-1">{ing.amount}</p>
                                     </div>
-                                    <div className="flex space-x-2 mt-4">
+                                    <div className="flex space-x-4 mt-4">
                                         <Button
                                             onClick={() => handleEditIngredient(ing)}
                                             className="flex-1 flex items-center justify-center space-x-1"
@@ -445,7 +445,7 @@ const Dashboard = () => {
                     <div className='md:col-span-2 space-y-5'>
 
                         {/* Shopping List */}
-                        <div className='rounded-xl p-4 bg-white shadow-lg space-y-4'>
+                        <div className='rounded-xl p-6 bg-white shadow-lg space-y-4'>
                             <div>
                                 <h1 className='text-2xl font-bold text-red-500'>Shopping List</h1>
                                 <p className='text-gray-600'>Missing items added automatically from your meal plan</p>
@@ -525,7 +525,7 @@ const Dashboard = () => {
                         </div>
 
                         {/* Budget */}
-                        <div className='rounded-xl p-4 bg-white shadow-lg space-y-4'>
+                        <div className='rounded-xl p-6 bg-white shadow-lg space-y-4'>
                             <div>
                                 <h1 className='text-2xl font-bold text-green-500'>Budget</h1>
                                 <p className='text-gray-600'>Track your spending and save money</p>
@@ -548,7 +548,7 @@ const Dashboard = () => {
                         </div>
 
                         {/* Tracking */}
-                        <div className='rounded-xl p-4 bg-white shadow-lg space-y-4'>
+                        <div className='rounded-xl p-6 bg-white shadow-lg space-y-4'>
                             <div>
                                 <h1 className='text-2xl font-bold text-blue-600'>Tracking</h1>
                                 <p className='text-gray-600'>Monitor your nutritional intake</p>

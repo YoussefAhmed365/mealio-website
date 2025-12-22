@@ -63,7 +63,7 @@ const HelpSupportForm = () => {
             </div>
 
             <div className="mt-8 text-center text-gray-500">
-                <p>App Version: {appVersion}</p>
+                <p>App Release: {appVersion}</p>
             </div>
         </>
     );

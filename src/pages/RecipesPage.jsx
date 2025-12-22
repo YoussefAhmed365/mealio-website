@@ -70,7 +70,7 @@ const RecipesPage = () => {
 
     const RecipeCard = ({ recipe }) => (
         <div onClick={() => handleSelectRecipe(recipe)} className='bg-white rounded-lg shadow-sm p-3 space-y-2 cursor-pointer hover:shadow-xl transition-shadow-sm'>
-            <img src={recipe.image} alt={recipe.title} className='w-full h-32 rounded-md object-cover' />
+            <img src={recipe.image} alt={recipe.title} className='w-full h-40 rounded-md object-cover' />
             <div className='flex justify-between items-center'>
                 <h3 className='font-bold text-gray-800'>{recipe.title}</h3>
                 <div className='flex items-center space-x-1'>
@@ -234,7 +234,7 @@ const RecipesPage = () => {
 
                     {/* Side */}
                     <div className='md:col-span-2 space-y-5'>
-                        <div className='rounded-xl p-4 bg-white shadow-lg space-y-3'>
+                        <div className='rounded-xl p-6 bg-white shadow-lg space-y-3'>
                             <div className='flex items-center space-x-2'>
                                 <SparklesIcon className='size-8 text-purple-500' />
                                 <div>

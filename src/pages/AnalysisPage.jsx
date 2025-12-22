@@ -1,22 +1,23 @@
 // Components & Libraries
-import TopNavbar from '../components/shared/TopNavbar'
-import Button from "../components/shared/Button"
-import Stack from '@mui/material/Stack'
-import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge'
-import { Player } from '@lottiefiles/react-lottie-player'
-import animationData from '../assets/json/lotties/congratulation-sparkle.json'
-import { LineChart } from '@mui/x-charts/LineChart'
+import { useState, useEffect } from "react";
+import TopNavbar from '../components/shared/TopNavbar';
+import Button from "../components/shared/Button";
+import Stack from '@mui/material/Stack';
+import { Gauge, gaugeClasses } from '@mui/x-charts/Gauge';
+import { LineChart } from '@mui/x-charts/LineChart';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import '../assets/css/AnalysisPage.css';
 
 // Icons
-import { ChevronDownIcon } from "@heroicons/react/24/outline"
-import WaterDropIcon from '../assets/icons/WaterDrop'
-import { FireIcon, SparklesIcon } from "@heroicons/react/24/solid"
-import WeightScaleIcon from '../assets/icons/WeightScale'
-import HeartPulseIcon from '../assets/icons/HeartPulse'
-import AwardIcon from '../assets/icons/Award'
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import WaterDropIcon from '../assets/icons/WaterDrop';
+import { FireIcon, SparklesIcon } from "@heroicons/react/24/solid";
+import WeightScaleIcon from '../assets/icons/WeightScale';
+import HeartPulseIcon from '../assets/icons/HeartPulse';
+import AwardIcon from '../assets/icons/Award';
 
-import '../assets/css/AnalysisPage.css'
-import { useState, useEffect } from "react"
+// Animations
+import confettiAnimation from '../animations/confetti_congratulation_sparkle.lottie?url';
 
 const BodyOverviewCharts = () => {
     const Charts = [
@@ -180,19 +181,10 @@ const AwardBox = () => {
         if (isFadingOut) {
             const timer = setTimeout(() => {
                 setIsVisible(false);
-            }, 500); // This delay should match the duration of your Tailwind transition (e.g., duration-500)
+            }, 500); // This delay should match the duration of Tailwind transition (e.g., duration-500)
             return () => clearTimeout(timer);
         }
     }, [isFadingOut]);
-
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: animationData,
-        rendererSettings: {
-            preserveAspectRatio: "xMidYMid slice"
-        }
-    };
 
     if (!isVisible) {
         return null; // Don't render anything if the component is not visible
@@ -202,7 +194,12 @@ const AwardBox = () => {
         <div
             className={`relative bg-white shadow-sm rounded-xl px-6 py-8 transition-opacity duration-500 ease-out ${isFadingOut ? "opacity-0" : "opacity-100"}`}>
             <div className="absolute inset-0 pointer-events-none">
-                <Player options={defaultOptions} height={300} width={300} />
+                <DotLottieReact
+                    src={confettiAnimation}
+                    loop
+                    autoplay
+                    style={{ width: 300, height: 300 }}
+                />
             </div>
             <div className="relative flex flex-col justify-center items-center z-10">
                 <div className="w-24 h-24 mb-4 border-[6px] border-slate-200 bg-gradient-to-r from-green-500 to-amber-400 shadow-xl rounded-full flex justify-center items-center">
@@ -219,7 +216,7 @@ const AwardBox = () => {
 const SuggestQuickMeal = () => {
     return (
         <div className="relative rounded-xl pt-8 px-8 pb-24 bg-[radial-gradient(at_25%_25%,_var(--tw-gradient-from)_0,_var(--tw-gradient-to)_50%)] from-amber-300 to-amber-100 shadow-sm space-y-3">
-            <div className="flex justify-center items-center space-x-4">
+            <div className="flex justify-start items-center space-x-4">
                 <SparklesIcon className="size-8 text-amber-500" />
                 <h2 className="text-xl font-bold bg-gradient-to-r from-amber-700 to-amber-500 text-transparent bg-clip-text">Let's Suggest a Quick Meal</h2>
             </div>
@@ -288,72 +285,72 @@ const AnalysisPage = () => {
             <TopNavbar />
             <div className='w-full grid grid-cols-1 xl:grid-cols-7 gap-4 my-4 px-4'>
 
-                    {/* Main */}
-                    <div className='md:col-span-5 space-y-6'>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-min">
-                            {/* Body Overview */}
-                            <div className="space-y-4">
-                                <div className="col-span-1 flex justify-between items-center">
-                                    <h1 className="text-3xl font-semibold">Body Overview</h1>
-                                    <div className="grid shrink-0 grid-cols-1 bg-white shadow-sm rounded-full focus-within:relative">
-                                        <select id="period" name="period" aria-label="Period" className="col-start-1 row-start-1 w-full appearance-none rounded-full bg-white py-1 pr-7 pl-3 text-base *:bg-white placeholder:text-gray-600 focus:outline-2 focus:-outline-offset-2 focus:outline-amber-600 sm:text-sm/6">
-                                            <option>Monthly</option>
-                                            <option>Daily</option>
-                                        </select>
-                                        <ChevronDownIcon data-slot="icon" aria-hidden="true" className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-800 sm:size-4" />
-                                    </div>
-                                </div>
-
-                                <div className="w-full rounded-xl py-12 px-10 bg-black flex flex-col justify-start items-center space-y-8">
-                                    <div className="text-center space-y-4">
-                                        <h5 className="text-lg text-gray-300">You've gain <span className="text-white text-base font-semibold">2kg</span> in a month keep it up!</h5>
-                                        <h6 className="text-base text-gray-400">Still need to gain</h6>
-                                        <h1 className="text-5xl font-bold text-white">950 kcal</h1>
-                                    </div>
-                                    <BodyOverviewCharts />
-                                </div>
-                            </div>
-
-                            {/* Daily Target */}
-                            <div className="space-y-4">
-                                <div className="col-span-1 flex justify-between items-center">
-                                    <h1 className="text-3xl font-semibold">My Daily Target</h1>
-                                    <Button styleType="text" className="text-sm">See All</Button>
-                                </div>
-
-                                <div className="grid grid-cols-2 gap-2 h-[88%]">
-                                    <DailyTargetCards />
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Line Chart */}
+                {/* Main */}
+                <div className='md:col-span-5 space-y-6'>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-min">
+                        {/* Body Overview */}
                         <div className="space-y-4">
-                            <h1 className="text-3xl font-semibold">Overall Progress</h1>
-                            <div className="bg-white p-8 rounded-xl shadow-sm">
-                                <div className="flex justify-between items-center mb-4">
-                                    <h2 className="text-xl font-bold text-gray-800">Nutrient Intake</h2>
-                                    <div className="grid shrink-0 grid-cols-1 bg-white shadow-sm rounded-full focus-within:relative">
-                                        <select id="chart-period" name="chart-period" aria-label="Chart Period" className="col-start-1 row-start-1 w-full appearance-none rounded-full bg-white py-1 pr-7 pl-3 text-base *:bg-white placeholder:text-gray-600 focus:outline-2 focus:-outline-offset-2 focus:outline-amber-600 sm:text-sm/6">
-                                            <option>Last 7 Days</option>
-                                            <option>Last 30 Days</option>
-                                            <option>Last 6 Months</option>
-                                        </select>
-                                        <ChevronDownIcon data-slot="icon" aria-hidden="true" className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-800 sm:size-4" />
-                                    </div>
+                            <div className="col-span-1 flex justify-between items-center">
+                                <h1 className="text-3xl font-semibold">Body Overview</h1>
+                                <div className="grid shrink-0 grid-cols-1 bg-white shadow-sm rounded-full focus-within:relative">
+                                    <select id="period" name="period" aria-label="Period" className="col-start-1 row-start-1 w-full appearance-none rounded-full bg-white py-1 pr-7 pl-3 text-base *:bg-white placeholder:text-gray-600 focus:outline-2 focus:-outline-offset-2 focus:outline-amber-600 sm:text-sm/6">
+                                        <option>Monthly</option>
+                                        <option>Daily</option>
+                                    </select>
+                                    <ChevronDownIcon data-slot="icon" aria-hidden="true" className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-800 sm:size-4" />
                                 </div>
-                                
-                                <LineChartBox />
+                            </div>
+
+                            <div className="w-full rounded-xl py-12 px-10 bg-black flex flex-col justify-start items-center space-y-8">
+                                <div className="text-center space-y-4">
+                                    <h5 className="text-lg text-gray-300">You've gain <span className="text-white text-base font-semibold">2kg</span> in a month keep it up!</h5>
+                                    <h6 className="text-base text-gray-400">Still need to gain</h6>
+                                    <h1 className="text-5xl font-bold text-white">950 kcal</h1>
+                                </div>
+                                <BodyOverviewCharts />
+                            </div>
+                        </div>
+
+                        {/* Daily Target */}
+                        <div className="space-y-4">
+                            <div className="col-span-1 flex justify-between items-center">
+                                <h1 className="text-3xl font-semibold">My Daily Target</h1>
+                                <Button styleType="text" className="text-sm">See All</Button>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-2 h-[88%]">
+                                <DailyTargetCards />
                             </div>
                         </div>
                     </div>
 
-                    {/* Side */}
-                    <div className='md:col-span-2 space-y-5'>
-                        <AwardBox />
-                        <SuggestQuickMeal />
-                        <DailyFoodTip />
+                    {/* Line Chart */}
+                    <div className="space-y-4">
+                        <h1 className="text-3xl font-semibold">Overall Progress</h1>
+                        <div className="bg-white px-8 pt-8 rounded-xl shadow-sm">
+                            <div className="flex justify-between items-center mb-4">
+                                <h2 className="text-xl font-bold text-gray-800">Nutrient Intake</h2>
+                                <div className="grid shrink-0 grid-cols-1 bg-white shadow-sm rounded-full focus-within:relative">
+                                    <select id="chart-period" name="chart-period" aria-label="Chart Period" className="col-start-1 row-start-1 w-full appearance-none rounded-full bg-white py-1 pr-7 pl-3 text-base *:bg-white placeholder:text-gray-600 focus:outline-2 focus:-outline-offset-2 focus:outline-amber-600 sm:text-sm/6">
+                                        <option>Last 7 Days</option>
+                                        <option>Last 30 Days</option>
+                                        <option>Last 6 Months</option>
+                                    </select>
+                                    <ChevronDownIcon data-slot="icon" aria-hidden="true" className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-800 sm:size-4" />
+                                </div>
+                            </div>
+
+                            <LineChartBox />
+                        </div>
                     </div>
+                </div>
+
+                {/* Side */}
+                <div className='md:col-span-2 space-y-5'>
+                    <AwardBox />
+                    <SuggestQuickMeal />
+                    <DailyFoodTip />
+                </div>
             </div>
         </div>
     );

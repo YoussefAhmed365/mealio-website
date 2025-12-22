@@ -6,10 +6,6 @@ import ProtectedRoute from './components/shared/ProtectedRoute';
 import Navbar from './components/shared/Navbar';
 import LoadingScreen from './components/shared/LoadingScreen';
 
-// Contexts
-// You have to use this import with showLoading() and hideLoading() functions from the context
-// import { useLoading } from '../contexts/LoadingContext'; <-- Use it inside any file where loading state is needed
-
 // pages
 const HomePage = lazy(() => import('./pages/HomePage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));

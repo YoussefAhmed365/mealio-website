@@ -127,16 +127,16 @@ const PlansPage = () => {
                     {/* Side */}
                     <div className='md:col-span-2 space-y-5'>
                         {/* Weekly Nutrition Summary */}
-                        <div className='rounded-xl p-4 bg-white shadow-lg space-y-3'>
+                        <div className='rounded-xl p-6 bg-white shadow-lg space-y-3'>
                             <div>
                                 <h1 className='text-2xl font-bold text-green-600'>Weekly Summary</h1>
-                                <p className='text-gray-600'>Your estimated nutritional overview.</p>
+                                <p className='text-gray-600'>Your daily estimated average nutritional overview.</p>
                             </div>
                             <div className='space-y-2 text-sm'>
-                                <div className='flex justify-between items-center'><span className='font-medium text-gray-700'>Avg. Daily Calories:</span> <span className='font-bold text-gray-800'>1850 kcal</span></div>
-                                <div className='flex justify-between items-center'><span className='font-medium text-gray-700'>Avg. Daily Protein:</span> <span className='font-bold text-gray-800'>95 g</span></div>
-                                <div className='flex justify-between items-center'><span className='font-medium text-gray-700'>Avg. Daily Carbs:</span> <span className='font-bold text-gray-800'>210 g</span></div>
-                                <div className='flex justify-between items-center'><span className='font-medium text-gray-700'>Avg. Daily Fats:</span> <span className='font-bold text-gray-800'>70 g</span></div>
+                                <div className='flex justify-between items-center'><span className='font-medium text-gray-700'>Calories:</span> <span className='font-bold text-gray-800'>1850 kcal</span></div>
+                                <div className='flex justify-between items-center'><span className='font-medium text-gray-700'>Protein:</span> <span className='font-bold text-gray-800'>95 g</span></div>
+                                <div className='flex justify-between items-center'><span className='font-medium text-gray-700'>Carbs:</span> <span className='font-bold text-gray-800'>210 g</span></div>
+                                <div className='flex justify-between items-center'><span className='font-medium text-gray-700'>Fats:</span> <span className='font-bold text-gray-800'>70 g</span></div>
                             </div>
                             <Link to="/analysis">
                                 <Button className={"bg-green-500 hover:bg-green-700 mt-3"}>View Detailed Report</Button>
@@ -144,7 +144,7 @@ const PlansPage = () => {
                         </div>
 
                         {/* Shopping List */}
-                        <div className='rounded-xl p-4 bg-white shadow-lg space-y-3'>
+                        <div className='rounded-xl p-6 bg-white shadow-lg space-y-3'>
                             <div>
                                 <h1 className='text-2xl font-bold text-red-500'>Shopping List</h1>
                                 <p className='text-gray-600'>Generated from your meal plan.</p>

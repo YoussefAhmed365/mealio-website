@@ -111,12 +111,12 @@ const DiscoverPage = () => {
 
                     {/* Side */}
                     <div className='md:col-span-2 space-y-5'>
-                        <div className='rounded-xl p-4 bg-white shadow-lg space-y-3'>
+                        <div className='rounded-xl p-6 bg-white shadow-lg space-y-3'>
                             <h2 className='text-xl font-bold text-purple-600'>Share Your Meal!</h2>
                             <p className='text-gray-600'>Have a recipe you love? Share it with the community and inspire others.</p>
                             <Button className="w-full bg-purple-500 hover:bg-purple-700">Post a Recipe</Button>
                         </div>
-                        <div className='rounded-xl p-4 bg-white shadow-lg space-y-3'>
+                        <div className='rounded-xl p-6 bg-white shadow-lg space-y-3'>
                             <h2 className='text-xl font-bold text-green-600'>Trending Tags</h2>
                             <div className='flex flex-wrap gap-2'>
                                 {['#Vegan', '#QuickDinner', '#LowCarb', '#Dessert', '#Chicken', '#Healthy'].map(tag => (
