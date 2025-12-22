@@ -42,7 +42,7 @@ const HelpSupportForm = () => {
 
             <div className="p-6 border rounded-lg bg-gray-50/50 space-y-6">
                 {supportItems.map((item, index) => (
-                    <div key={index} className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
+                    <div key={index} className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 space-y-4 md:space-y-0">
                         <div>
                             <h3 className="font-semibold text-gray-800">{item.title}</h3>
                             <p className="text-gray-600 text-sm">{item.description}</p>
