@@ -10,7 +10,7 @@ import { BellIcon } from '@heroicons/react/24/outline';
 import SearchField from '../../components/shared/Search';
 
 // Images
-import UserAvatar from '../../assets/images/avatar.webp';
+import UserAvatar from '../../../public/profiles/default.webp';
 
 const TopNavbar = () => {
     const { notifications } = useNotification();

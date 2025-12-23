@@ -5,6 +5,7 @@ const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replac
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [profilePhoto, setProfilePhoto] = useState('public/profiles/default.webp');
     const [isLoading, setIsLoading] = useState(true);
 
     // Check for user login
@@ -86,6 +87,7 @@ export const AuthProvider = ({ children }) => {
         return { success: true };
     };
 
+    // Update Profile
     const updateProfile = async (userData) => {
         setIsLoading(true);
         try {
@@ -112,6 +114,33 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    // Update Profile Photo
+    const updateProfilePhoto = async (photo) => {
+        setIsLoading(true);
+        try {
+            const res = await fetch(`${API_URL}/api/users/profile/photo`, {
+                method: 'PUT',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(photo),
+                credentials: 'include',
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) throw new Error(data.message || "Update failed");
+
+            // Update state and local storage with new info
+            setProfilePhoto(data.profilePhoto);
+            localStorage.setItem("userInfo", JSON.stringify(data));
+
+            return { success: true, message: "Profile updated successfully" };
+        } catch (error) {
+            return { success: false, message: error.message };
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
     // Complete Onboarding Handler
     const completeOnboarding = async (onboardingData) => {
         setIsLoading(true);
@@ -137,7 +166,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, register, login, logout, isLoading, checkUserLoggedIn, updateProfile, completeOnboarding }}>
+        <AuthContext.Provider value={{ user, profilePhoto, register, login, logout, isLoading, checkUserLoggedIn, updateProfile, updateProfilePhoto, completeOnboarding }}>
             {children}
         </AuthContext.Provider>
     );

@@ -3,12 +3,28 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import Button from "../shared/Button";
 import Field from "../shared/Field";
+import ImageUploadModal from "./profilePhoto/ImageUploadModal.jsx";
 
-// Images
-import avatar from "../../assets/images/avatar.webp";
+// UI
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
+import { PencilIcon } from "@heroicons/react/24/solid";
 
 const ProfileForm = () => {
-    const { user, updateProfile } = useAuth();
+    const { user, updateProfile, profilePhoto, updateProfilePhoto } = useAuth();
+
+    // Profile Photo Handler
+    const [openImageUploadModal, setOpenImageUploadModal] = useState(false);
+    const [profileImageUpdated, setProfileImageUpdated] = useState(false);
+
+    const onEditClick = () => {
+        setProfileImageUpdated(false);
+        setOpenImageUploadModal(true);
+    };
+
+    const handleClose = () => {
+        setProfileImageUpdated(true);
+        setOpenImageUploadModal(false);
+    };
 
     // Get user data
     const USER_DATA = [
@@ -76,17 +92,53 @@ const ProfileForm = () => {
                 </p>
             </div>
 
-            <div className="flex justify-start items-center space-x-6">
-                <div className="rounded-full w-24 h-24 overflow-hidden object-center">
-                    <img src={avatar} alt="Your Profile" className="w-full h-full object-cover" />
+            <div className="relative w-fit">
+                <div className="size-28 rounded-full overflow-hidden">
+                    <img src={`../../../${user.profilePhoto}`} alt="Your Profile" className="size-full object-cover object-center" />
                 </div>
-                <Button styleType="light" className="max-w-fit">Change</Button>
+
+                <div className="absolute bottom-0 right-0">
+                    <Menu>
+                        <MenuButton className="rounded-full bg-gray-100 p-3 transition-colors focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-200 data-open:bg-gray-200">
+                            <PencilIcon className="size-5 fill-slate-600" />
+                        </MenuButton>
+
+                        <MenuItems
+                            transition
+                            anchor="bottom start"
+                            className="mt-2 w-52 origin-top-right rounded-xl bg-slate-50 border border-slate-200 p-1 text-sm/6 text-gray-900 transition duration-300 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-closed:scale-95 data-closed:opacity-0"
+                        >
+                            {/* Implement a function to change the profile photo */}
+                            <MenuItem>
+                                <button
+                                    className="flex w-full items-center gap-2 rounded-lg px-3 py-1.5 transition-colors hover:bg-slate-200 cursor-pointer"
+                                    onClick={onEditClick}
+                                >
+                                    Change Photo
+                                </button>
+                            </MenuItem>
+                            <div className="my-1 h-px bg-slate-200" />
+                            <MenuItem>
+                                <button className="flex w-full items-center gap-2 rounded-lg px-3 py-1.5 transition-colors hover:bg-slate-200 text-red-700 cursor-pointer">
+                                    Remove
+                                </button>
+                            </MenuItem>
+                        </MenuItems>
+                    </Menu>
+                </div>
+
+                {openImageUploadModal && (
+                    <ImageUploadModal
+                        openModal={openImageUploadModal}
+                        handleClose={() => handleClose()}
+                    />
+                )}
             </div>
 
             {error && <div className="text-red-500">{error}</div>}
             {success && <div className="text-green-500">{success}</div>}
 
-            <form onSubmit={handleSubmit} className="w-full space-y-6">
+            <form onSubmit={handleSubmit} className="w-full space-y-4">
                 {USER_DATA.map((field, index) => (
                     <Field
                         key={index}
