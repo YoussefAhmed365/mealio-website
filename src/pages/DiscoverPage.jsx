@@ -12,7 +12,7 @@ import Salmon from '../assets/images/food/salmon.jpg'
 import VegCurry from '../assets/images/food/veg-curry.jpg'
 import Pizza from '../assets/images/food/pizza.jpg'
 import BeefStirFry from '../assets/images/food/beef-stir-fry.jpg'
-import Avatar from '../assets/images/avatar.webp'
+import Avatar from '../../public/profiles/default.webp'
 
 const mockPosts = [
     {
