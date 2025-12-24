@@ -64,7 +64,7 @@ export const getCroppedImg = async (imageSrc, croppedPixels, rotation = 0) => {
                     return;
                 }
                 resolve(blob);
-            }, "image/jpeg");
+            }, "image/webp");
         });
     } catch (error) {
         console.error("Error cropping image:", error);

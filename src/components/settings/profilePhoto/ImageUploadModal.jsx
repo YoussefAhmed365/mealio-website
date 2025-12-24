@@ -2,16 +2,16 @@ import { useRef, useState } from "react";
 import PropTypes from "prop-types";
 import {
     Box,
-    IconButton,
     Modal,
-    Tooltip,
 } from "@mui/material";
 import Button from "../../shared/Button.jsx";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import ImageCropper from "./ImageCropper.jsx";
-import { getCroppedImg, blobToBase64 } from "../../../helpers/helper.js";
+import { getCroppedImg } from "../../../helpers/helper.js";
+import { useAuth } from "../../../contexts/AuthContext.jsx";
 
 const ImageUploadModal = ({ handleClose, openModal }) => {
+    const { updateProfilePhoto } = useAuth();
     const [dragEnter, setDragEnter] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const [error, setError] = useState("");
@@ -88,22 +88,37 @@ const ImageUploadModal = ({ handleClose, openModal }) => {
 
     const handleSubmit = async () => {
         const { rotation, croppedAreaPixels } = imageProperties;
+
         if (!selectedImage) {
             setError("No image selected. Please upload an image.");
             return;
         }
+
         const croppedImage = await getCroppedImg(
             selectedImage,
             croppedAreaPixels,
             rotation
         );
+
         if (!croppedImage) {
             setError("Failed to crop the image. Please try again.");
             return;
         }
-        const base64Image = await blobToBase64(croppedImage);
-        localStorage.setItem("userProfilePic", base64Image);
-        handleClose();
+
+        // Create FormData to send to API
+        const formData = new FormData();
+        formData.append("photo", croppedImage, "profile.webp");
+
+        // Send to API
+        const result = await updateProfilePhoto(formData);
+
+        if (result.success) {
+            setError("");
+            setSelectedImage(null);
+            handleClose();
+        } else {
+            setError(result.message || "Failed to upload photo");
+        }
     };
 
     const handleChangeImage = () => {
@@ -118,7 +133,7 @@ const ImageUploadModal = ({ handleClose, openModal }) => {
             onClose={handleClose}
             aria-labelledby="image-upload-modal"
         >
-            <Box className="flex flex-col justify-between bg-white p-5 rounded-lg text-center w-[34rem] h-[382px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 outline-none shadow-lg">
+            <Box className="flex flex-col justify-between bg-white p-5 rounded-lg text-center w-[34rem] h-[412px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 outline-none shadow-lg">
                 <div className="flex items-center justify-between order-b-2 border-b-amber-600">
                     <div className="flex flex-col items-start gap-1.5 ml-4 pb-2.5">
                         <h3 className="font-bold text-xl leading-6 pl-5">Upload Photo</h3>

@@ -5,7 +5,7 @@ const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replac
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [profilePhoto, setProfilePhoto] = useState('public/profiles/default.webp');
+    const [profilePhoto, setProfilePhoto] = useState('/profiles/default.webp');
     const [isLoading, setIsLoading] = useState(true);
 
     // Check for user login
@@ -19,6 +19,9 @@ export const AuthProvider = ({ children }) => {
             if (res.ok) {
                 const data = await res.json();
                 setUser(data);
+                if (data.profilePhoto) {
+                    setProfilePhoto(`${API_URL}${data.profilePhoto}`);
+                }
             } else {
                 setUser(null);
             }
@@ -48,6 +51,9 @@ export const AuthProvider = ({ children }) => {
 
             if (res.ok) {
                 setUser(data); // Login after signing up
+                if (data.profilePhoto) {
+                    setProfilePhoto(`${API_URL}${data.profilePhoto}`);
+                }
                 return { success: true };
             } else {
                 return { success: false, message: data.message || 'Registration failed' };
@@ -69,6 +75,9 @@ export const AuthProvider = ({ children }) => {
         if (res.ok) {
             const data = await res.json();
             setUser(data); // Update state and store user data
+            if (data.profilePhoto) {
+                setProfilePhoto(`${API_URL}${data.profilePhoto}`);
+            }
             return { success: true };
         } else {
             const errorData = await res.json();
@@ -115,13 +124,12 @@ export const AuthProvider = ({ children }) => {
     };
 
     // Update Profile Photo
-    const updateProfilePhoto = async (photo) => {
+    const updateProfilePhoto = async (formData) => {
         setIsLoading(true);
         try {
             const res = await fetch(`${API_URL}/api/users/profile/photo`, {
                 method: 'PUT',
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(photo),
+                body: formData, // FormData automatically sets the Content-Type to multipart/form-data
                 credentials: 'include',
             });
 
@@ -130,7 +138,7 @@ export const AuthProvider = ({ children }) => {
             if (!res.ok) throw new Error(data.message || "Update failed");
 
             // Update state and local storage with new info
-            setProfilePhoto(data.profilePhoto);
+            setProfilePhoto(`${API_URL}${data.profilePhoto}`);
             localStorage.setItem("userInfo", JSON.stringify(data));
 
             return { success: true, message: "Profile updated successfully" };

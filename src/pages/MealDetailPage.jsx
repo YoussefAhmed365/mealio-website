@@ -1,18 +1,18 @@
 // Components & Libraries
-import React, { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import TopNavbar from '../components/shared/TopNavbar'
-import Button from '../components/shared/Button'
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import TopNavbar from '../components/shared/TopNavbar';
+import Button from '../components/shared/Button';
 
 // Icons
-import { HeartIcon, BookmarkIcon, ArrowLeftIcon, PlusIcon } from '@heroicons/react/24/solid'
+import { HeartIcon, BookmarkIcon, ArrowLeftIcon, PlusIcon } from '@heroicons/react/24/solid';
 
 // Mock Images (replace with dynamic ones)
-import Salmon from '../assets/images/food/salmon.jpg'
-import VegCurry from '../assets/images/food/veg-curry.jpg'
-import Pizza from '../assets/images/food/pizza.jpg'
-import BeefStirFry from '../assets/images/food/beef-stir-fry.jpg'
-import Avatar from '../../public/profiles/default.webp'
+import Salmon from '../assets/images/food/salmon.jpg';
+import VegCurry from '../assets/images/food/veg-curry.jpg';
+import Pizza from '../assets/images/food/pizza.jpg';
+import BeefStirFry from '../assets/images/food/beef-stir-fry.jpg';
+import Avatar from '/profiles/default.webp?url';
 
 // Re-using mockPosts from DiscoverPage for demonstration
 const mockPosts = [

@@ -1,18 +1,18 @@
 // Components & Libraries
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import TopNavbar from '../components/shared/TopNavbar'
-import Button from '../components/shared/Button'
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import TopNavbar from '../components/shared/TopNavbar';
+import Button from '../components/shared/Button';
 
 // Icons
-import { HeartIcon, ChatBubbleOvalLeftEllipsisIcon, BookmarkIcon } from '@heroicons/react/24/solid'
+import { HeartIcon, ChatBubbleOvalLeftEllipsisIcon, BookmarkIcon } from '@heroicons/react/24/solid';
 
 // Mock Images (replace with dynamic ones)
-import Salmon from '../assets/images/food/salmon.jpg'
-import VegCurry from '../assets/images/food/veg-curry.jpg'
-import Pizza from '../assets/images/food/pizza.jpg'
-import BeefStirFry from '../assets/images/food/beef-stir-fry.jpg'
-import Avatar from '../../public/profiles/default.webp'
+import Salmon from '../assets/images/food/salmon.jpg';
+import VegCurry from '../assets/images/food/veg-curry.jpg';
+import Pizza from '../assets/images/food/pizza.jpg';
+import BeefStirFry from '../assets/images/food/beef-stir-fry.jpg';
+import Avatar from '/profiles/default.webp?url';
 
 const mockPosts = [
     {

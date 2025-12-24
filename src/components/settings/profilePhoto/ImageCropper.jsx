@@ -1,8 +1,9 @@
-import { IconButton, Slider, Tooltip } from "@mui/material";
+import { colors, IconButton, Slider, Tooltip } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import Cropper from "react-easy-crop";
 import { MagnifyingGlassPlusIcon, MagnifyingGlassMinusIcon, ArrowUturnLeftIcon, ArrowUturnRightIcon, } from "@heroicons/react/24/solid";
 import PropTypes from "prop-types";
+import Button from "../../shared/Button";
 
 const ImageCropper = ({
     uploadedImage,
@@ -64,7 +65,7 @@ const ImageCropper = ({
 
     return (
         <>
-            <div className="relative -top-6 w-[242px] h-[242px] bg-gray-50 overflow-hidden [clip-path: circle(37%)]">
+            <div className="relative -top-6 w-[262px] h-[262px] bg-gray-50 overflow-hidden [clip-path:circle(37%)]">
                 <Cropper
                     image={uploadedImage}
                     crop={crop}
@@ -78,18 +79,15 @@ const ImageCropper = ({
                     onZoomChange={setZoom}
                     onRotationChange={setRotation}
                 />
-                <div className="flex items-center justify-between bg-gray-400 absolute h-6 w-[62px] top-[168px] left-[92px] rounded-4xl text-amber-600 text-xs p-1.5 opacity-80 transition duration-200 ease-in-out hover:hidden">
+                <div className="text-center bg-white absolute h-6.5 w-[62px] top-[168px] left-[92px] rounded-4xl text-amber-600 text-xs p-1.5 opacity-75 transition duration-200 ease-in-out hover:hidden">
                     <label htmlFor="none">Move</label>
                 </div>
             </div>
-            <div className="flex gap-4 absolute bottom-16 w-3/4">
+            <div className="flex gap-4 absolute bottom-20 w-3/4">
                 <div className="flex gap-2 items-center">
                     <Tooltip title="Zoom Out">
-                        <IconButton
-                            onClick={(e) => handleZoomClick("zoomout")}
-                            sx={{ outline: "none" }}
-                        >
-                            <MagnifyingGlassMinusIcon className="cursor-pointer text-amber-600 opacity-55 hover:opacity-100" />
+                        <IconButton onClick={(e) => handleZoomClick("zoomout")}>
+                            <MagnifyingGlassMinusIcon className="size-5 cursor-pointer fill-amber-600 opacity-55 hover:opacity-100" />
                         </IconButton>
                     </Tooltip>
                     <label htmlFor="none" className="flex gap-1.5 items-center justify-center">
@@ -97,7 +95,7 @@ const ImageCropper = ({
                     </label>
                     <Tooltip title="Zoom In">
                         <IconButton onClick={() => handleZoomClick("zoomin")}>
-                            <MagnifyingGlassPlusIcon className="cursor-pointer text-amber-600 opacity-55 hover:opacity-100" />
+                            <MagnifyingGlassPlusIcon className="size-5 cursor-pointer fill-amber-600 opacity-55 hover:opacity-100" />
                         </IconButton>
                     </Tooltip>
                 </div>
@@ -108,6 +106,7 @@ const ImageCropper = ({
                         max={3}
                         step={0.1}
                         aria-labelledby="Zoom"
+                        style={{ color: "oklch(66.6% 0.179 58.318)" }}
                         onChange={(e, value) => handleZoomChange(value)}
                         title="Slide to zoom in or out"
                     />
@@ -116,7 +115,7 @@ const ImageCropper = ({
                 <div className="flex gap-2 items-center">
                     <Tooltip title="Rotate Left">
                         <IconButton onClick={() => handleRotationChange("left")}>
-                            <ArrowUturnLeftIcon className="cursor-pointer text-amber-600 opacity-55 hover:opacity-100" />
+                            <ArrowUturnLeftIcon className="size-5 cursor-pointer fill-amber-600 opacity-55 hover:opacity-100" />
                         </IconButton>
                     </Tooltip>
                     <label className="flex gap-1.5 items-center justify-center">
@@ -124,7 +123,7 @@ const ImageCropper = ({
                     </label>
                     <Tooltip title="Rotate Right">
                         <IconButton onClick={() => handleRotationChange("right")}>
-                            <ArrowUturnRightIcon className="cursor-pointer text-amber-600 opacity-55 hover:opacity-100" />
+                            <ArrowUturnRightIcon className="size-5 cursor-pointer fill-amber-600 opacity-55 hover:opacity-100" />
                         </IconButton>
                     </Tooltip>
                 </div>

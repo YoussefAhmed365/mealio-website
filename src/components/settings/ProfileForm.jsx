@@ -26,6 +26,12 @@ const ProfileForm = () => {
         setOpenImageUploadModal(false);
     };
 
+    useEffect(() => {
+        if (profileImageUpdated) {
+            window.location.reload();
+        }
+    }, [profileImageUpdated])
+
     // Get user data
     const USER_DATA = [
         { label: "Firstname", type: "text", name: "firstname", placeholder: "Your first name" },
@@ -94,7 +100,11 @@ const ProfileForm = () => {
 
             <div className="relative w-fit">
                 <div className="size-28 rounded-full overflow-hidden">
-                    <img src={`../../../${user.profilePhoto}`} alt="Your Profile" className="size-full object-cover object-center" />
+                    <img
+                        src={profilePhoto}
+                        alt="Your Profile"
+                        className="size-full object-cover object-center"
+                    />
                 </div>
 
                 <div className="absolute bottom-0 right-0">
