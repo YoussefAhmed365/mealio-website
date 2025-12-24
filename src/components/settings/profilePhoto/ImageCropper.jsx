@@ -64,8 +64,8 @@ const ImageCropper = ({
     };
 
     return (
-        <>
-            <div className="relative -top-6 w-[262px] h-[262px] bg-gray-50 overflow-hidden [clip-path:circle(37%)]">
+        <div className="flex flex-col items-center w-full gap-6">
+            <div className="relative w-64 h-64 rounded-full overflow-hidden shadow-md border-4 border-gray-100">
                 <Cropper
                     image={uploadedImage}
                     crop={crop}
@@ -79,56 +79,48 @@ const ImageCropper = ({
                     onZoomChange={setZoom}
                     onRotationChange={setRotation}
                 />
-                <div className="text-center bg-white absolute h-6.5 w-[62px] top-[168px] left-[92px] rounded-4xl text-amber-600 text-xs p-1.5 opacity-75 transition duration-200 ease-in-out hover:hidden">
-                    <label htmlFor="none">Move</label>
-                </div>
             </div>
-            <div className="flex gap-4 absolute bottom-20 w-3/4">
-                <div className="flex gap-2 items-center">
-                    <Tooltip title="Zoom Out">
-                        <IconButton onClick={(e) => handleZoomClick("zoomout")}>
-                            <MagnifyingGlassMinusIcon className="size-5 cursor-pointer fill-amber-600 opacity-55 hover:opacity-100" />
-                        </IconButton>
-                    </Tooltip>
-                    <label htmlFor="none" className="flex gap-1.5 items-center justify-center">
-                        <p className="text-xs text-amber-600">Zoom</p>
-                    </label>
-                    <Tooltip title="Zoom In">
-                        <IconButton onClick={() => handleZoomClick("zoomin")}>
-                            <MagnifyingGlassPlusIcon className="size-5 cursor-pointer fill-amber-600 opacity-55 hover:opacity-100" />
-                        </IconButton>
-                    </Tooltip>
-                </div>
-                <div className="w-full flex items-center">
-                    <Slider
-                        value={zoom}
-                        min={1}
-                        max={3}
-                        step={0.1}
-                        aria-labelledby="Zoom"
-                        style={{ color: "oklch(66.6% 0.179 58.318)" }}
-                        onChange={(e, value) => handleZoomChange(value)}
-                        title="Slide to zoom in or out"
-                    />
+            <div className="flex flex-col gap-4 w-full px-4">
+                <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-2">
+                        <Tooltip title="Zoom Out">
+                            <IconButton onClick={() => handleZoomClick("zoomout")} size="small">
+                                <MagnifyingGlassMinusIcon className="size-5 text-amber-600" />
+                            </IconButton>
+                        </Tooltip>
+                        <Slider
+                            value={zoom}
+                            min={1}
+                            max={3}
+                            step={0.1}
+                            aria-labelledby="Zoom"
+                            sx={{ color: '#d97706' }}
+                            onChange={(e, value) => handleZoomChange(value)}
+                            title="Slide to zoom in or out"
+                        />
+                        <Tooltip title="Zoom In">
+                            <IconButton onClick={() => handleZoomClick("zoomin")} size="small">
+                                <MagnifyingGlassPlusIcon className="size-5 text-amber-600" />
+                            </IconButton>
+                        </Tooltip>
+                    </div>
                 </div>
 
-                <div className="flex gap-2 items-center">
+                <div className="flex justify-center items-center gap-4">
                     <Tooltip title="Rotate Left">
-                        <IconButton onClick={() => handleRotationChange("left")}>
-                            <ArrowUturnLeftIcon className="size-5 cursor-pointer fill-amber-600 opacity-55 hover:opacity-100" />
+                        <IconButton onClick={() => handleRotationChange("left")} size="small">
+                            <ArrowUturnLeftIcon className="size-5 text-amber-600" />
                         </IconButton>
                     </Tooltip>
-                    <label className="flex gap-1.5 items-center justify-center">
-                        <p className="text-xs text-amber-600">Rotate</p>
-                    </label>
+                    <span className="text-sm font-medium text-amber-600">Rotate</span>
                     <Tooltip title="Rotate Right">
-                        <IconButton onClick={() => handleRotationChange("right")}>
-                            <ArrowUturnRightIcon className="size-5 cursor-pointer fill-amber-600 opacity-55 hover:opacity-100" />
+                        <IconButton onClick={() => handleRotationChange("right")} size="small">
+                            <ArrowUturnRightIcon className="size-5 text-amber-600" />
                         </IconButton>
                     </Tooltip>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

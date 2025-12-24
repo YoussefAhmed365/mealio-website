@@ -133,11 +133,11 @@ const ImageUploadModal = ({ handleClose, openModal }) => {
             onClose={handleClose}
             aria-labelledby="image-upload-modal"
         >
-            <Box className="flex flex-col justify-between bg-white p-5 rounded-lg text-center w-[34rem] h-[412px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 outline-none shadow-lg">
-                <div className="flex items-center justify-between order-b-2 border-b-amber-600">
-                    <div className="flex flex-col items-start gap-1.5 ml-4 pb-2.5">
+            <Box className="flex flex-col bg-white p-6 rounded-xl text-center w-full max-w-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 outline-none shadow-2xl">
+                <div className="flex items-center justify-between border-b-2 border-b-amber-600 pb-4">
+                    <div className="flex flex-col items-start gap-1.5 ml-4">
                         <h3 className="font-bold text-xl leading-6 pl-5">Upload Photo</h3>
-                        <p className="font-medium leading-4 opacity-40 pl-5">
+                        <p className="font-medium leading-4 opacity-40 pl-5 text-left">
                             Upload a photo of yourself to personalize your account
                         </p>
                     </div>
@@ -146,7 +146,7 @@ const ImageUploadModal = ({ handleClose, openModal }) => {
                     </Button>
                 </div>
 
-                <div className="flex flex-col items-center mt-1">
+                <div className="flex flex-col items-center justify-center py-6 gap-4 flex-grow">
                     {selectedImage ? (
                         <ImageCropper
                             uploadedImage={selectedImage}
@@ -156,7 +156,7 @@ const ImageUploadModal = ({ handleClose, openModal }) => {
                         <>
                             <label
                                 htmlFor="fileInput"
-                                className={`${dragEnter ? "drag-enter" : ""} w-[180px] h-[180px] rounded-[50%] border-[2px] border-dashed border-[#cbd0dc] flex items-center justify-center cursor-pointer text-gray-900 text-center p-5 transition-all duration-300 hover:border-amber-600 hover:shadow-md hover:shadow-gray-300`}
+                                className={`${dragEnter ? "drag-enter" : ""} w-48 h-48 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center cursor-pointer text-gray-900 text-center p-5 transition-all duration-300 hover:border-amber-600 hover:shadow-md hover:bg-gray-50`}
                                 onDragEnter={handleDragOver}
                                 onDragOver={(event) => event.preventDefault()}
                                 onDrop={handleDrop}
@@ -174,15 +174,15 @@ const ImageUploadModal = ({ handleClose, openModal }) => {
                                     ? `Drop the file here`
                                     : `Choose or Drag & Drop your photo here`}
                             </label>
-                            <span className="text-sm text-gray-600 mt-2.5">
+                            <span className="text-sm text-gray-500">
                                 200 x 200 min / 5MB max
                             </span>
                         </>
                     )}
-                    {error && <span className="text-red text-sm">{error}</span>}
+                    {error && <span className="text-red-500 text-sm font-medium">{error}</span>}
                 </div>
 
-                <div className="flex justify-center gap-2.5">
+                <div className="flex justify-end gap-3 pt-2">
                     {selectedImage === null ? (
                         <>
                             <Button onClick={handleClose} styleType="secondary" className={"max-w-fit"}>
