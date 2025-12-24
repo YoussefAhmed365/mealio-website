@@ -8,15 +8,4 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
-  build: {
-    rollupOptions: {
-      // Fix for "Use of eval" warning
-      onwarn(warning, warn) {
-        if (warning.code === 'EVAL' && /lottie/i.test(warning.id)) {
-          return;
-        }
-        warn(warning);
-      },
-    },
-  },
 });
