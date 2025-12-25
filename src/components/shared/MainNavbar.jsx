@@ -31,7 +31,7 @@ export default function HeroSection() {
                                 </div>
                                 <div className="nav absolute md:static inset-y-0 right-0 flex items-center">
                                     <div className="hidden md:flex md:items-center">
-                                        <ul className='flex justify-start items-center space-x-10'>
+                                        <ul className='flex justify-start items-center md:space-x-10'>
                                             {NavBtns.map((btn, idx) => (
                                                 <li key={idx}><Link className='text-gray-600 font-medium hover:text-amber-600 transition duration-300' to={btn.to}>{btn.text}</Link></li>
                                             ))}

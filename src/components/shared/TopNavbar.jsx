@@ -35,7 +35,7 @@ const TopNavbar = () => {
                     {({ open }) => (
                         <>
                             <PopoverButton className='block p-0 bg-transparent border-none border-0 focus:outline-hidden cursor-pointer'>
-                                <BellIcon aria-hidden="true" className="size-6 text-gray-600" />
+                                <BellIcon className="size-6 text-gray-600" />
                             </PopoverButton>
                             <PopoverPanel className={`absolute right-0 z-10 mt-4 bg-white w-96 p-4 shadow-lg rounded-2xl origin-top-right transition-all duration-300 ${open
                                 ? "opacity-100 translate-y-0 scale-100"

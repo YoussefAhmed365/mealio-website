@@ -19,11 +19,22 @@ const ProfileForm = () => {
     const onEditClick = () => {
         setProfileImageUpdated(false);
         setOpenImageUploadModal(true);
+
+        // When a modal opens:
+        const rootElement = document.getElementById('root');
+        if (rootElement) {
+            rootElement.setAttribute('inert', ''); // Add the inert attribute
+        }
     };
 
     const handleClose = () => {
         setProfileImageUpdated(true);
         setOpenImageUploadModal(false);
+        // When the modal closes:
+        const rootElement = document.getElementById('root');
+        if (rootElement) {
+            rootElement.removeAttribute('inert'); // Remove the inert attribute
+        }
     };
 
     useEffect(() => {
@@ -109,14 +120,14 @@ const ProfileForm = () => {
 
                 <div className="absolute bottom-0 right-0">
                     <Menu>
-                        <MenuButton className="rounded-full bg-gray-100 p-3 transition-colors focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-200 data-open:bg-gray-200">
+                        <MenuButton className="rounded-full bg-gray-100 p-3 transition-colors hover:bg-gray-200">
                             <PencilIcon className="size-5 fill-slate-600" />
                         </MenuButton>
 
                         <MenuItems
                             transition
                             anchor="bottom start"
-                            className="mt-2 w-52 origin-top-right rounded-xl bg-slate-50 border border-slate-200 p-1 text-sm/6 text-gray-900 transition duration-300 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-closed:scale-95 data-closed:opacity-0"
+                            className="mt-2 w-52 origin-top-right rounded-xl bg-slate-50 border border-slate-200 p-1 text-sm/6 text-gray-900 outline-none transition duration-300 ease-out [--anchor-gap:var(--spacing-1)] closed:scale-95 closed:opacity-0"
                         >
                             {/* Implement a function to change the profile photo */}
                             <MenuItem>

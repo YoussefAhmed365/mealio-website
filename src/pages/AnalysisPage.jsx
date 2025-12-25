@@ -297,7 +297,7 @@ const AnalysisPage = () => {
                                         <option>Monthly</option>
                                         <option>Daily</option>
                                     </select>
-                                    <ChevronDownIcon data-slot="icon" aria-hidden="true" className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-800 sm:size-4" />
+                                    <ChevronDownIcon data-slot="icon" className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-800 sm:size-4" />
                                 </div>
                             </div>
 
@@ -336,7 +336,7 @@ const AnalysisPage = () => {
                                         <option>Last 30 Days</option>
                                         <option>Last 6 Months</option>
                                     </select>
-                                    <ChevronDownIcon data-slot="icon" aria-hidden="true" className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-800 sm:size-4" />
+                                    <ChevronDownIcon data-slot="icon" className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-800 sm:size-4" />
                                 </div>
                             </div>
 
