@@ -19,9 +19,7 @@ export const AuthProvider = ({ children }) => {
             if (res.ok) {
                 const data = await res.json();
                 setUser(data);
-                if (data.profilePhoto) {
-                    setProfilePhoto(`${API_URL}${data.profilePhoto}`);
-                }
+                if (data.profilePhoto) setProfilePhoto(`${API_URL}${data.profilePhoto}`);
             } else {
                 setUser(null);
             }
@@ -51,9 +49,8 @@ export const AuthProvider = ({ children }) => {
 
             if (res.ok) {
                 setUser(data); // Login after signing up
-                if (data.profilePhoto) {
-                    setProfilePhoto(`${API_URL}${data.profilePhoto}`);
-                }
+                if (data.token) localStorage.setItem('authToken', data.token); // Store token
+                if (data.profilePhoto) setProfilePhoto(`${API_URL}${data.profilePhoto}`);
                 return { success: true };
             } else {
                 return { success: false, message: data.message || 'Registration failed' };
@@ -75,9 +72,8 @@ export const AuthProvider = ({ children }) => {
         if (res.ok) {
             const data = await res.json();
             setUser(data); // Update state and store user data
-            if (data.profilePhoto) {
-                setProfilePhoto(`${API_URL}${data.profilePhoto}`);
-            }
+            if (data.token) localStorage.setItem('authToken', data.token); // Store token
+            if (data.profilePhoto) setProfilePhoto(`${API_URL}${data.profilePhoto}`);
             return { success: true };
         } else {
             const errorData = await res.json();
@@ -93,6 +89,7 @@ export const AuthProvider = ({ children }) => {
             headers: { 'Content-Type': 'application/json' },
         });
         setUser(null);
+        localStorage.removeItem('authToken'); // Remove token
         return { success: true };
     };
 
@@ -107,9 +104,8 @@ export const AuthProvider = ({ children }) => {
                 credentials: 'include',
             });
 
+            if (!res.ok) throw new Error("Update failed");
             const data = await res.json();
-
-            if (!res.ok) throw new Error(data.message || "Update failed");
 
             // Update state and local storage with new info
             setUser(data);
@@ -133,9 +129,8 @@ export const AuthProvider = ({ children }) => {
                 credentials: 'include',
             });
 
+            if (!res.ok) throw new Error("Update failed");
             const data = await res.json();
-
-            if (!res.ok) throw new Error(data.message || "Update failed");
 
             // Update state and local storage with new info
             setProfilePhoto(`${API_URL}${data.profilePhoto}`);
@@ -160,9 +155,8 @@ export const AuthProvider = ({ children }) => {
                 credentials: 'include',
             });
 
+            if (!res.ok) throw new Error("Failed to save onboarding data");
             const data = await res.json();
-
-            if (!res.ok) throw new Error(data.message || "Failed to save onboarding data");
 
             setUser(data); // Update user with new preferences
             return { success: true };
