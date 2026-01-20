@@ -21,17 +21,20 @@ const LoginPage = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [remember, setRemember] = useState(false);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const { login } = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         const result = await login(email, password, remember);
 
         if (result.success) {
             navigate('/main/home');
         } else {
+            setLoading(false);
             setError(result.message);
             setTimeout(() => {
                 setError("");
@@ -41,37 +44,41 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="px-6 py-10 md:px-20 md:py-7 content-center h-auto md:h-screen">
+        <div className="px-6 py-10 md:px-20 md:py-7 content-center h-screen">
             <div className="max-w-full mx-auto flex flex-col-reverse justify-center items-center gap-10 md:flex-row md:justify-between md:items-stretch md:gap-20">
-                <div className="w-full flex flex-col justify-center items-start gap-2">
-                    <h6 className="text-2xl md:text-xl font-bold"><span className="text-amber-600">Meal</span><span className="text-amber-950">.io</span></h6>
-                    <h1 className="text-4xl font-bold">Welcome back!</h1>
-                    <p className="text-gray-600 font-medium">To keep connected with us please login with your personal info</p>
-
-                    {/* Error Message Display */}
-                    <div className={`w-full text-center mt-2 p-3 bg-red-100 border border-red-400 text-red-700 rounded ${error ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}>
-                        {error}
+                <div className="w-full flex flex-col justify-center items-start gap-4 md:gap-3">
+                    <h6 className="text-2xl md:text-xl font-bold mb-4 md:mb-0"><span className="text-amber-600">Meal</span><span className="text-amber-950">.io</span></h6>
+                    <div>
+                        <h1 className="text-4xl font-bold">Welcome back!</h1>
+                        <p className="text-gray-600 font-medium">To keep connected with us please login with your personal info</p>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="w-full flex flex-col justify-start items-center gap-2 mt-2">
-                        <Field label={'Email'} type='email' name={'email'} id={'email'} value={email} onChange={(e) => setEmail(e.target.value)} placeholder={'Your Email'} required />
-                        <Field label={'Password'} type='password' name={'password'} id={'password'} value={password} onChange={(e) => setPassword(e.target.value)} placeholder={'Your Password'} required />
-                        <Button type='submit' className="mt-4" children='Sign In' />
-                    </form>
-
-                    <div className="flex justify-between items-center w-full">
-                        <div className="mt-2 flex items-center gap-1">
-                            <label htmlFor="remember" className="flex flex-row items-center gap-2.5 text-gray-600 text-sm font-medium cursor-pointer">
-                                <input id="remember" type="checkbox" className="peer hidden" checked={remember} onChange={() => setRemember(!remember)}/>
-                                <div htmlFor="remember" className="h-5 w-5 flex rounded-md border border-[#a2a1a833] bg-white peer-checked:bg-amber-600 transition">
-                                    <CheckIcon className="size-5 text-white stroke-1 stroke-white" />
-                                </div>
-                                Remember Me
-                            </label>
+                    <div className="w-full">
+                        {/* Error Message Display */}
+                        <div className={`w-full text-center mt-2 p-3 bg-red-100 border border-red-400 text-red-700 rounded ${error ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}>
+                            {error}
                         </div>
 
-                        <div className="text-sm font-medium">
-                            <Link key={"restore-account"} to={"/restore-account"} className="text-amber-600 underline hover:text-amber-700 transition">Forgot your password?</Link>
+                        <form onSubmit={handleSubmit} className="w-full flex flex-col justify-start items-center gap-2 mt-2">
+                            <Field label={'Email'} type='email' name={'email'} id={'email'} value={email} onChange={(e) => setEmail(e.target.value)} placeholder={'Your Email'} required />
+                            <Field label={'Password'} type='password' name={'password'} id={'password'} value={password} onChange={(e) => setPassword(e.target.value)} placeholder={'Your Password'} required />
+                            <Button type='submit' className="mt-4" children={loading ? <span className="animate-spin w-8 h-8 border-2 border-transparent border-t-white rounded-full"></span> : 'Sign In'} disabled={loading} />
+                        </form>
+
+                        <div className="flex justify-between items-center w-full">
+                            <div className="mt-2 flex items-center gap-1">
+                                <label htmlFor="remember" className="flex flex-row items-center gap-2.5 text-gray-600 text-sm font-medium cursor-pointer">
+                                    <input id="remember" type="checkbox" className="peer hidden" checked={remember} onChange={() => setRemember(!remember)} />
+                                    <div htmlFor="remember" className="h-5 w-5 flex rounded-md border border-[#a2a1a833] bg-white peer-checked:bg-amber-600 transition">
+                                        <CheckIcon className="size-5 text-white stroke-1 stroke-white" />
+                                    </div>
+                                    Remember Me
+                                </label>
+                            </div>
+
+                            <div className="text-sm font-medium">
+                                <Link key={"restore-account"} to={"/restore-account"} className="text-amber-600 underline hover:text-amber-700 transition">Forgot your password?</Link>
+                            </div>
                         </div>
                     </div>
 
@@ -98,7 +105,7 @@ const LoginPage = () => {
                     </div>
                 </div>
 
-                <div className="w-full h-[400px] md:h-auto rounded-2xl bg-center bg-cover bg-no-repeat flex justify-center items-end px-4 md:px-8 py-6 md:py-12" style={{ backgroundImage: `url(${BackgroundImage})` }}>
+                <div className="w-full h-auto rounded-2xl bg-center bg-cover bg-no-repeat hidden md:flex justify-center items-end px-4 md:px-8 py-6 md:py-12" style={{ backgroundImage: `url(${BackgroundImage})` }}>
                     <div className="w-full h-full bg-slate-400/30 backdrop-filter backdrop-blur-lg rounded-xl px-8 py-12 text-white flex flex-col justify-between items-start">
                         <div>
                             <div className="w-1/4 flex justify-center items-center gap-x-2.5 mb-10">
