@@ -134,18 +134,61 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isTrackNutrition }) => {
     );
 };
 
+const Bottombar = ({ isTrackNutrition }) => {
+    const navigate = useNavigate();
+
+    const filteredPages = isTrackNutrition
+        ? pages.filter(page => page.name !== 'Settings')
+        : pages.filter(page => page.name !== 'Nutrition Analysis' && page.name !== 'Settings');
+
+    return (
+        <div className='fixed w-full bottom-4 left-0 flex justify-center items-center z-50'>
+            <div className='min-w-11/12 h-16 mx-auto px-4 bg-amber-600 rounded-3xl shadow flex justify-between items-center gap-2'>
+                {filteredPages.map((page, index) => (
+                    <NavLink
+                        key={index}
+                        to={page.path}
+                        className={({ isActive }) =>
+                            `nav-link flex justify-center items-center rounded-full p-2 transition-colors duration-300 ${isActive
+                                ? 'bg-amber-100 text-amber-600 font-semibold'
+                                : 'text-white'
+                            }`}
+                    >
+                        {({ isActive }) => (
+                            <div className={`link-icon text-2xl ${isActive ? 'text-amber-500 hover:text-amber-600' : 'text-gray-100 hover:text-amber-100'}`}>
+                                <page.icon isActive={isActive} />
+                            </div>
+                        )}
+                    </NavLink>
+                ))}
+            </div>
+        </div>
+    );
+};
+
 const Navbar = () => {
     const [isCollapsed, setIsCollapsed] = useState(true);
     const [isTrackNutrition] = useState(true);
 
-    return (
-        <div className="flex bg-gray-50 min-h-screen">
-            <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} isTrackNutrition={isTrackNutrition} />
-            <main className={`flex-1 transition-all duration-300 ease-in-out ${isCollapsed ? 'ml-20' : 'ml-20 md:ml-64 z-50 md:z-0 '}`}>
-                <Outlet />
-            </main>
-        </div>
-    );
+    {
+        if (window.innerWidth < 768) {
+            return (
+                <main className='relative'>
+                    <Outlet />
+                    <Bottombar isTrackNutrition={isTrackNutrition} />
+                </main>
+            );
+        } else {
+            return (
+                <div className="flex bg-gray-50 min-h-screen">
+                    <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} isTrackNutrition={isTrackNutrition} />
+                    <main className={`flex-1 transition-all duration-300 ease-in-out ${isCollapsed ? 'ml-20' : 'ml-20 md:ml-64 z-50 md:z-0 '}`}>
+                        <Outlet />
+                    </main>
+                </div>
+            );
+        }
+    }
 };
 
 export default Navbar;

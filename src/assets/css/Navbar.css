@@ -1,6 +1,7 @@
 .nav-link:hover {
     color: #d97706 !important;
-    .link-icon {
-        color: #d97706 !important;
-    }
+}
+
+.nav-link:hover .link-icon {
+    color: #d97706 !important;
 }
