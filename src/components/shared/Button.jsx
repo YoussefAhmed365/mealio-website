@@ -1,4 +1,4 @@
-const Button = ({ btnKey, onClick, children, type = "button", styleType = "primary", className, disabled = false }) => {
+const Button = ({ btnKey, onClick, children, type = "button", styleType = "primary", className = "", disabled = false }) => {
     const classMap = {
         primary: "w-full px-6 py-3 bg-amber-600 text-white font-medium rounded-lg hover:bg-amber-700 disabled:bg-amber-200 disabled:cursor-default focus:ring-4 focus:ring-amber-300 focus:ring-opacity-75 focus:outline-hidden transition-colors duration-200",
         secondary: "w-full px-6 py-3 bg-gray-300 text-gray-800 font-medium rounded-lg hover:bg-gray-400 disabled:bg-gray-100 disabled:cursor-default focus:ring-4 focus:ring-gray-300 focus:ring-opacity-75 focus:outline-hidden transition-colors duration-200",
@@ -15,7 +15,7 @@ const Button = ({ btnKey, onClick, children, type = "button", styleType = "prima
     };
 
     return (
-        <button key={btnKey} onClick={onClick} className={classMap[styleType] + " cursor-pointer " + className} type={type} disabled={disabled}>
+        <button key={btnKey} onClick={onClick} className={`${classMap[styleType]} cursor-pointer ${className}`.trim()} type={type} disabled={disabled}>
             {children}
         </button>
     );
