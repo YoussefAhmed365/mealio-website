@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from 'react';
-import { useAuth } from './AuthContext';
+import { useAuth, API_URL } from './AuthContext';
 
 const NotificationContext = createContext();
 
@@ -15,7 +15,7 @@ export const NotificationProvider = ({ children }) => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/api/notifications/get?email=${user.email}`, {
+            const response = await fetch(`${API_URL}/api/notifications/get?email=${user.email}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
