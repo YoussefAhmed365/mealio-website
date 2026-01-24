@@ -173,7 +173,7 @@ const Navbar = () => {
     {
         if (window.innerWidth < 768) {
             return (
-                <main className='relative'>
+                <main className='relative mb-20'>
                     <Outlet />
                     <Bottombar isTrackNutrition={isTrackNutrition} />
                 </main>
