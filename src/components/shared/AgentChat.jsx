@@ -37,6 +37,7 @@ const AgentChat = () => {
             const res = await fetch('http://localhost:5000/api/agent/ask', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
                 body: JSON.stringify({ 
                     prompt: currentPrompt,
                     history: chat.map(msg => ({

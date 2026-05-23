@@ -1,22 +1,83 @@
 import { useState, useEffect } from "react"
 import Button from "../shared/Button"
 import Field from "../shared/Field"
+import { useAuth, API_URL } from "../../contexts/AuthContext"
 
 const ALLERGIES_LIST = ["Gluten", "Dairy", "Peanuts", "Shellfish", "Soy", "Eggs", "Tree Nuts", "Fish"];
 
 const MealPreferencesForm = () => {
+    const { user, checkUserLoggedIn } = useAuth();
+    
     const [numPeople, setNumPeople] = useState(1);
     const [peopleAllergies, setPeopleAllergies] = useState([]);
     const [dietaryPreferences, setDietaryPreferences] = useState(["No Preference"]);
     const [trackingPreference, setTrackingPreference] = useState("No Tracking");
     const [culturalCuisine, setCulturalCuisine] = useState("");
     const [unitOfMeasurement, setUnitOfMeasurement] = useState("metric");
+    const [budget, setBudget] = useState("Medium");
+    
+    const [isSaving, setIsSaving] = useState(false);
+    const [status, setStatus] = useState({ type: "", message: "" });
+    const [hasLoaded, setHasLoaded] = useState(false);
 
+    // Initialize/Sync peopleAllergies array length with numPeople
     useEffect(() => {
         setPeopleAllergies((current) =>
             Array.from({ length: numPeople }, (_, i) => current[i] || { name: `Person ${i + 1}`, allergies: [] })
         );
     }, [numPeople]);
+
+    // Load preferences from user context on mount or when user changes
+    useEffect(() => {
+        if (user?.mealPreferences && !hasLoaded) {
+            const prefs = user.mealPreferences;
+            
+            // Populate dietaryPreferences
+            if (Array.isArray(prefs.preferences)) {
+                setDietaryPreferences(prefs.preferences);
+            } else if (typeof prefs.preferences === "string") {
+                setDietaryPreferences([prefs.preferences]);
+            }
+            
+            // Populate trackingOption
+            if (prefs.trackingOption) {
+                setTrackingPreference(prefs.trackingOption);
+            }
+            
+            // Populate budget
+            if (prefs.budget) {
+                setBudget(prefs.budget);
+            }
+            
+            // Populate culturalCuisine
+            if (prefs.culturalCuisine !== undefined) {
+                setCulturalCuisine(prefs.culturalCuisine);
+            }
+            
+            // Populate unitOfMeasurement
+            if (prefs.unitOfMeasurement) {
+                setUnitOfMeasurement(prefs.unitOfMeasurement);
+            }
+            
+            // Populate persons
+            if (prefs.persons) {
+                const personKeys = Object.keys(prefs.persons);
+                if (personKeys.length > 0) {
+                    const loadedPeople = personKeys.map((key) => ({
+                        name: prefs.persons[key].name || "Person",
+                        allergies: prefs.persons[key].allergies || [],
+                    }));
+                    setPeopleAllergies(loadedPeople);
+                    setNumPeople(loadedPeople.length);
+                }
+            }
+            
+            setHasLoaded(true);
+        } else if (user && !user.mealPreferences && !hasLoaded) {
+            // User is loaded but has no saved preferences, mark as loaded to prevent overriding default states repeatedly
+            setHasLoaded(true);
+        }
+    }, [user, hasLoaded]);
 
     const handleAllergyToggle = (i, allergy) => {
         setPeopleAllergies((prev) => {
@@ -51,8 +112,51 @@ const MealPreferencesForm = () => {
         setNumPeople((prev) => Math.max(1, Math.min(10, prev + amount)));
     };
 
-    const handleSave = () => {
-        console.log("Saving meal preferences", { numPeople, peopleAllergies, dietaryPreferences, trackingPreference, culturalCuisine, unitOfMeasurement });
+    const handleSave = async () => {
+        setIsSaving(true);
+        setStatus({ type: "", message: "" });
+
+        const personsObj = {};
+        peopleAllergies.forEach((person, idx) => {
+            personsObj[`person${idx + 1}`] = {
+                name: person.name,
+                allergies: person.allergies,
+            };
+        });
+
+        const body = {
+            preferences: dietaryPreferences,
+            persons: personsObj,
+            budget,
+            trackingOption: trackingPreference,
+            culturalCuisine,
+            unitOfMeasurement,
+        };
+
+        try {
+            const res = await fetch(`${API_URL}/api/meal-preferences`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(body),
+                credentials: "include",
+            });
+
+            if (res.ok) {
+                setStatus({ type: "success", message: "Preferences saved successfully!" });
+                // Re-fetch user profile to sync AuthContext state!
+                await checkUserLoggedIn();
+            } else {
+                const errorData = await res.json();
+                setStatus({ type: "error", message: errorData.message || "Failed to save preferences." });
+            }
+        } catch (error) {
+            console.error("Save error:", error);
+            setStatus({ type: "error", message: "A server error occurred. Please try again." });
+        } finally {
+            setIsSaving(false);
+        }
     };
 
     return (
@@ -61,16 +165,16 @@ const MealPreferencesForm = () => {
             <div className="mb-6 flex flex-col justify-start items-center">
                 <span className="block text-gray-700 font-medium mb-4">Family Persons</span>
                 <div className="flex justify-start items-center gap-6">
-                    <button onClick={() => handleUpdate(-1)} className="w-10 h-10 flex items-center justify-center text-2xl font-bold bg-gray-200 text-gray-600 rounded-full">-</button>
+                    <button onClick={() => handleUpdate(-1)} className="w-10 h-10 flex items-center justify-center text-2xl font-bold bg-gray-200 text-gray-600 rounded-full hover:bg-gray-300 transition-colors">-</button>
                     <span className="text-4xl font-bold text-amber-600">{numPeople}</span>
-                    <button onClick={() => handleUpdate(1)} className="w-10 h-10 flex items-center justify-center text-2xl font-bold bg-gray-200 text-gray-600 rounded-full">+</button>
+                    <button onClick={() => handleUpdate(1)} className="w-10 h-10 flex items-center justify-center text-2xl font-bold bg-gray-200 text-gray-600 rounded-full hover:bg-gray-300 transition-colors">+</button>
                 </div>
             </div>
 
             {/* Allergies */}
             <div className="mb-6">
                 <span className="block text-gray-700 font-medium mb-2">Allergies</span>
-                <div className="space-x-5 flex justify-start items-center overflow-x-scroll">
+                <div className="space-x-5 flex justify-start items-center overflow-x-scroll pb-2">
                     {peopleAllergies.map((person, i) => (
                         <div key={i} className="p-4 border-2 rounded-lg border-slate-400 min-w-[468px] w-[468px]">
                             <input
@@ -103,6 +207,18 @@ const MealPreferencesForm = () => {
                     {["Vegetarian", "Vegan", "Pescatarian", "Keto", "Paleo", "Gluten-Free", "No Preference"].map((pref, i) => (
                         <Button key={i} styleType={dietaryPreferences.includes(pref) ? "primary" : "outline"} className={"max-w-fit"} onClick={() => handleDietaryToggle(pref)}>
                             {pref}
+                        </Button>
+                    ))}
+                </div>
+            </div>
+
+            {/* Weekly Budget */}
+            <div className="mb-8 p-6 border rounded-lg bg-gray-50/50">
+                <span className="block text-gray-700 font-medium mb-2">Weekly Budget</span>
+                <div className="flex flex-wrap gap-2">
+                    {["Low", "Medium", "High", "No Limit"].map((b, i) => (
+                        <Button key={i} styleType={budget === b ? "primary" : "outline"} className={"max-w-fit"} onClick={() => setBudget(b)}>
+                            {b}
                         </Button>
                     ))}
                 </div>
@@ -141,7 +257,15 @@ const MealPreferencesForm = () => {
                 </div>
             </div>
 
-            <Button styleType="primary" onClick={handleSave}>Save Preferences</Button>
+            {status.message && (
+                <div className={`p-4 mb-4 rounded-lg font-medium text-sm ${status.type === "success" ? "bg-emerald-50 text-emerald-800 border border-emerald-200" : "bg-rose-50 text-rose-800 border border-rose-200"}`}>
+                    {status.message}
+                </div>
+            )}
+
+            <Button styleType="primary" onClick={handleSave} disabled={isSaving}>
+                {isSaving ? "Saving..." : "Save Preferences"}
+            </Button>
         </>
     );
 };
