@@ -135,8 +135,6 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, isTrackNutrition }) => {
 };
 
 const Bottombar = ({ isTrackNutrition }) => {
-    const navigate = useNavigate();
-
     const filteredPages = isTrackNutrition
         ? pages.filter(page => page.name !== 'Settings')
         : pages.filter(page => page.name !== 'Nutrition Analysis' && page.name !== 'Settings');

@@ -62,7 +62,7 @@ const Footer = () => {
             <div className="flex flex-col md:flex-row justify-between items-center px-8 md:px-10 pb-12">
                 <div className="space-y-2 w-full md:w-1/3 mb-10 md:mb-0">
                     <h1 className="text-3xl font-bold"><span className="text-amber-600">Meal</span><span className="text-amber-900">.io</span></h1>
-                    <h1 className="text-3xl font-bold">We help you plan your meals with the power of <span className="bg-gradient-to-r from-amber-600 to-amber-200 text-transparent bg-clip-text">AI</span>.</h1>
+                    <h1 className="text-3xl font-bold">We help you plan your meals with the power of <span className="bg-linear-to-r from-amber-600 to-amber-200 text-transparent bg-clip-text">AI</span>.</h1>
                     <p className="text-gray-600">Meal.io, 2025.</p>
                 </div>
 

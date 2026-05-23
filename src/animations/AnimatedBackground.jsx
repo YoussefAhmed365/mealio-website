@@ -52,12 +52,12 @@ const AnimatedBackground = ({ className }) => {
         <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
             {/* Large flowing shape - top right */}
             <div
-                className={`absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-br ${styles.primary} rounded-full opacity-20 blur-2xl animate-[moveShape1_5s_ease-in-out_infinite]`}
+                className={`absolute -top-32 -right-32 w-96 h-96 bg-linear-to-b ${styles.primary} rounded-full opacity-20 blur-2xl animate-[moveShape1_5s_ease-in-out_infinite]`}
             />
 
             {/* Medium organic shape - bottom left */}
             <div
-                className={`absolute -bottom-24 -left-24 w-80 h-64 bg-gradient-to-tr ${styles.secondary} opacity-15 blur-xl animate-[moveShape2_5s_ease-in-out_infinite]`}
+                className={`absolute -bottom-24 -left-24 w-80 h-64 bg-linear-to-tr ${styles.secondary} opacity-15 blur-xl animate-[moveShape2_5s_ease-in-out_infinite]`}
                 style={{
                     borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%',
                     transform: 'rotate(-15deg)'
@@ -66,12 +66,12 @@ const AnimatedBackground = ({ className }) => {
 
             {/* Small accent shape - top left */}
             <div
-                className={`absolute top-16 left-16 w-32 h-32 bg-gradient-to-br ${styles.accent} rounded-full opacity-25 blur-lg animate-[moveShape3_5s_ease-in-out_infinite]`}
+                className={`absolute top-16 left-16 w-32 h-32 bg-linear-to-b ${styles.accent} rounded-full opacity-25 blur-lg animate-[moveShape3_5s_ease-in-out_infinite]`}
             />
 
             {/* Curved shape - right side */}
             <div
-                className={`absolute top-1/3 -right-16 w-48 h-96 bg-gradient-to-l ${styles.primary} opacity-10 blur-xl animate-[moveShape4_5s_ease-in-out_infinite]`}
+                className={`absolute top-1/3 -right-16 w-48 h-96 bg-linear-to-l ${styles.primary} opacity-10 blur-xl animate-[moveShape4_5s_ease-in-out_infinite]`}
                 style={{
                     borderRadius: '50% 0% 0% 50%',
                     transform: 'rotate(25deg)'
@@ -80,7 +80,7 @@ const AnimatedBackground = ({ className }) => {
 
             {/* Bottom accent */}
             <div
-                className={`absolute bottom-8 right-1/4 w-40 h-20 bg-gradient-to-r ${styles.accent} opacity-20 blur-lg animate-[moveShape5_5s_ease-in-out_infinite]`}
+                className={`absolute bottom-8 right-1/4 w-40 h-20 bg-linear-to-r ${styles.accent} opacity-20 blur-lg animate-[moveShape5_5s_ease-in-out_infinite]`}
                 style={{
                     borderRadius: '50% 50% 0% 100%',
                     transform: 'rotate(-10deg)'
@@ -89,11 +89,11 @@ const AnimatedBackground = ({ className }) => {
 
             {/* Subtle background shapes */}
             <div
-                className={`absolute top-1/2 left-1/3 w-24 h-24 bg-gradient-to-br ${styles.secondary} rounded-full opacity-10 blur-md transform -translate-x-1/2 -translate-y-1/2 animate-[moveShape6_5s_ease-in-out_infinite]`}
+                className={`absolute top-1/2 left-1/3 w-24 h-24 bg-linear-to-b ${styles.secondary} rounded-full opacity-10 blur-md transform -translate-x-1/2 -translate-y-1/2 animate-[moveShape6_5s_ease-in-out_infinite]`}
             />
 
             <div
-                className={`absolute bottom-1/3 left-1/4 w-16 h-32 bg-gradient-to-t ${styles.primary} opacity-15 blur-md animate-[moveShape7_5s_ease-in-out_infinite]`}
+                className={`absolute bottom-1/3 left-1/4 w-16 h-32 bg-linear-to-t ${styles.primary} opacity-15 blur-md animate-[moveShape7_5s_ease-in-out_infinite]`}
                 style={{
                     borderRadius: '0% 100% 50% 50%',
                     transform: 'rotate(45deg)'

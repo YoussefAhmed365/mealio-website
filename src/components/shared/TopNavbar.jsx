@@ -22,7 +22,11 @@ const TopNavbar = () => {
     const displayName = `${user.firstname} ${user.lastname}`;
 
     return (
-        <nav className="bg-white px-4 mt-6 mb-2 flex justify-between items-center" style={{ minWidth: "calc(100% - 32px)" }}>
+        <nav className="bg-white py-4 px-4 flex justify-between items-center gap-3" style={{ minWidth: "calc(100% - 32px)",
+                    borderBottom: '1px solid rgba(217, 119, 6, 0.1)',
+                    background: 'rgba(255, 251, 235, 0.6)',
+                    backdropFilter: 'blur(16px)',
+                    WebkitBackdropFilter: 'blur(16px)' }}>
             {/* Meal.io App Name */}
             <h2 className='text-2xl font-bold text-amber-600 cursor-default'>Meal<span className='text-amber-950'>.io</span></h2>
 

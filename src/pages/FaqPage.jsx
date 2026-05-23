@@ -50,7 +50,7 @@ const AccordionItem = ({ faq, isOpen, onClick }) => (
             aria-expanded={isOpen}
         >
             <span className={`text-lg font-medium transition-colors duration-300 ${isOpen ? 'text-amber-600' : 'text-gray-800'}`}>{faq.question}</span>
-            <span className="flex-shrink-0 ml-4">
+            <span className="shrink-0 ml-4">
                 <ChevronDownIcon className={`w-6 h-6 text-gray-400 transition-transform duration-500 ease-in-out ${isOpen ? 'transform rotate-180 text-amber-600' : ''}`} />
             </span>
         </button>

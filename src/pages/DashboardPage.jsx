@@ -139,11 +139,11 @@ const Dashboard = () => {
                 <div className='md:col-span-5 space-y-5'>
 
                     {/* Header */}
-                    <div className='rounded-xl py-10 px-6 md:px-14 text-center md:text-start bg-gradient-to-l from-amber-500 to-amber-200 shadow-lg relative overflow-hidden'>
+                    <div className='rounded-xl py-10 px-6 md:px-14 text-center md:text-start bg-linear-to-l from-amber-500 to-amber-200 shadow-lg relative overflow-hidden'>
                         <h1 className='text-4xl font-bold text-amber-800 md:w-1/2 mb-4'>Start Generating Your Meals of The Week.</h1>
                         <p className='text-gray-600 md:w-3/4 mb-6 font-medium'>Discover the magic of effortless meal planning! Generate delicious, personalized meal plans tailored to your preferences with just one click.</p>
-                        <Link key={"Generate"} to={"/generate-meal-ai"}><Button className={"text-base max-w-fit"}>Generate With AI</Button></Link>
-                        <img src={MainSectionBG} alt='Header Background' className='absolute top-0 md:-top-[24%] right-0 h-full md:h-96 opacity-60 object-cover' />
+                        <Link key={"Generate"} to={'/main/generate-meal-ai'}><Button className={"text-base max-w-fit"}>Generate With AI</Button></Link>
+                        <img src={MainSectionBG} alt='Header Background' className='absolute top-0 md:top-[-24%] right-0 h-full md:h-96 opacity-60 object-cover' />
                     </div>
 
                     {/* Food Widgets */}
@@ -467,7 +467,7 @@ const Dashboard = () => {
                                 {/* Field to enter amount with accept button */}
                                 <div className='flex justify-center items-center space-x-2'>
                                     <input type='number' className='w-full md:w-24 p-2 border border-gray-300 rounded-md text-center' placeholder='Amount' />
-                                    <Button styleType={"danger"} className={"px-[1rem] py-2 text-sm"}>Add</Button>
+                                    <Button styleType={"danger"} className={"px-4 py-2 text-sm"}>Add</Button>
                                 </div>
                             </div>
                             <div className='w-full flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0 my-1 py-2 border-b border-b-gray-300 last:border-none px-3'>
@@ -484,7 +484,7 @@ const Dashboard = () => {
                                 {/* Field to enter amount with accept button */}
                                 <div className='flex justify-center items-center space-x-2'>
                                     <input type='number' className='w-full md:w-24 p-2 border border-gray-300 rounded-md text-center' placeholder='Amount' />
-                                    <Button styleType={"danger"} className={"px-[1rem] py-2 text-sm"}>Add</Button>
+                                    <Button styleType={"danger"} className={"px-4 py-2 text-sm"}>Add</Button>
                                 </div>
                             </div>
                             <div className='w-full flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0 my-1 py-2 border-b border-b-gray-300 last:border-none px-3'>
@@ -501,7 +501,7 @@ const Dashboard = () => {
                                 {/* Field to enter amount with accept button */}
                                 <div className='flex justify-center items-center space-x-2'>
                                     <input type='number' className='w-full md:w-24 p-2 border border-gray-300 rounded-md text-center' placeholder='Amount' />
-                                    <Button styleType={"danger"} className={"px-[1rem] py-2 text-sm"}>Add</Button>
+                                    <Button styleType={"danger"} className={"px-4 py-2 text-sm"}>Add</Button>
                                 </div>
                             </div>
                             <div className='w-full flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0 my-1 py-2 border-b border-b-gray-300 last:border-none px-3'>
@@ -518,7 +518,7 @@ const Dashboard = () => {
                                 {/* Field to enter amount with accept button */}
                                 <div className='flex justify-center items-center space-x-2'>
                                     <input type='number' className='w-full md:w-24 p-2 border border-gray-300 rounded-md text-center' placeholder='Amount' />
-                                    <Button styleType={"danger"} className={"px-[1rem] py-2 text-sm"}>Add</Button>
+                                    <Button styleType={"danger"} className={"px-4 py-2 text-sm"}>Add</Button>
                                 </div>
                             </div>
                         </div>

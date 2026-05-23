@@ -16,6 +16,7 @@ const OnboardingFlow = lazy(() => import('./pages/OnboardingPage'));
 import { OnboardingProvider } from './contexts/OnboradingContext';
 import { NotificationProvider } from './contexts/NotificationContext';
 const Dashboard = lazy(() => import('./pages/DashboardPage'));
+const GenerativeAI = lazy(() => import('./pages/GenerativeAI'));
 const Plans = lazy(() => import('./pages/PlansPage'));
 const Recipes = lazy(() => import('./pages/RecipesPage'));
 const Shopping = lazy(() => import('./pages/ShoppingPage'));
@@ -53,6 +54,7 @@ function App() {
                                 <Route path='/get-started' element={<OnboardingFlow />} />
                                 <Route path="/main" element={<Navbar />}>
                                     <Route path='home' element={<Dashboard />} />
+                                    <Route path='generate-meal-ai' element={<GenerativeAI />} />
                                     <Route path='plans' element={<Plans />} />
                                     <Route path='recipes' element={<Recipes />} />
                                     <Route path='shopping-list' element={<Shopping />} />

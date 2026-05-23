@@ -17,6 +17,7 @@
     "@mui/material": "^7.3.2",
     "@mui/x-charts": "^8.12.0",
     "@tailwindcss/vite": "^4.1.13",
+    "prop-types": "^15.8.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-easy-crop": "^5.5.6",
